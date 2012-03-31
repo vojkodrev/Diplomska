@@ -560,7 +560,7 @@ Slika \ref{pic:smooth1} prikazuje našo zglajeno funkcijo. Slika \ref{pic:smooth
 \label{pic:smooth2}
 \end{figure}
 
-Če sedaj to zglajeno funkcijo (slika \ref{pic:smooth1}) še enkrat odvajamo, dobimo lepšo funkcijo drugega odvoda (slika \ref{pic:d22}, kjer lahko določimo točko svetlo-temne meje.
+Če sedaj to zglajeno funkcijo (slika \ref{pic:smooth1}) še enkrat odvajamo, dobimo lepšo funkcijo drugega odvoda (slika \ref{pic:d22}), kjer lahko določimo točko svetlo-temne meje.
 
 \begin{figure}
 \begin{center}
@@ -570,94 +570,238 @@ Slika \ref{pic:smooth1} prikazuje našo zglajeno funkcijo. Slika \ref{pic:smooth
 \label{pic:d22}
 \end{figure}
 
+\subsection{Določanje ničle/svetlo-temne meje}
 
+Ničla na drugem odvodu naše funkcije (slika \ref{pic:d22}) se poišče tako, da se najprej najde njegov maksimum. Potem  se pa poišče dve zaporedni točki, kjer se jima spremeni predznak. Spodnji algoritem prikazuje ta postopek. Algoritem sprejme indeks maksimalnega elementa kot vhodni parameter in vrne indeks prvega elementa od dveh kjer se spremeni predznak.
 
+\begin{verbatim}
+For (i = s; i < dolzina(f); i++)
+    if (f[i].X == 0) return i;
+    if (f[i].X < 0) return i – 1;
+\end{verbatim}
 
+Če je ničla med najdenima elementoma, potem se jo določi preko linearne interpolacije (formula \ref{eq:linint}).
 
-
-\chapter{Sklicevanje na besedilne konstrukte}
-\label{ch1}
-Matematična ali popolna indukcija je eno prvih orodij, ki jih spoznamo za dokazovanje trditev pri matematičnih predmetih. 
-\begin{izrek}
-\label{iz:1}
-Za vsako naravno število $n$ velja
-\begin{equation}
-n < 2^n.
-\label{eq:1}
-\end{equation}
-\end{izrek}
-\begin{dokaz}
-Dokazovanje z indukcijo zahteva, da neenakost~\eqref{eq:1} najprej preverimo za najmanjše naravno število --- $0$. Res, ker je $0 < 1 = 2^0$, je neenačba~\eqref{eq:1} za $n=0$ izpolnjena.
-
-Sledi indukcijski korak. S predpostavko, da je neenakost~\eqref{eq:1} veljavna pri nekem naravnem številu $n$, je potrebno pokazati, da je ista neenakost v veljavi tudi pri njegovem nasledniku --- naravnem številu $n+1$. Računajmo.
 \begin{align}
-n+1 &< 2^n + 1  \label{eq:2}\\
-    &\le 2^n + 2^n \label{eq:3}\\
-    &= 2^{n+1} \nonumber
+k &= \dfrac{y_2-y_1}{x_2-x_1}  \nonumber\\
+n &= y_1-k*x_1 \nonumber \\
+z &= (-n/k) \label{eq:linint}
 \end{align} 
-Neenakost~\eqref{eq:2} je posledica indukcijske predpostavke, neenakost~\eqref{eq:3} pa enostavno dejstvo, da je za vsako naravno število $n$ izraz $2^n$ vsaj tako velik kot 1. S tem je dokaz Izreka~\ref{iz:1} zaključen.
-\end{dokaz}
 
-Opazimo, da je \LaTeX\ številko izreka podredil številki poglavja.
+Z predstavlja x koordinato kjer se nahaja ničla na naši funkciji drugega odvoda in posledično točka svetlo-temne meje na naši originalni funkciji.
 
-
-\chapter{Plovke: slike in tabele}
-\label{ch2}
-Slike in daljše tabele praviloma vključujemo v dokument kot plovke. Pozicija plovke v končnem izdelku ni pogojena s tekom besedila, temveč z izgledom strani. \LaTeX\ bo skušal plovko postaviti samostojno, praviloma na vrh strani, na kateri se na takšno plovko prvič sklicujemo. Pri tem pa bo na vsako stran končnega izdelka želel postaviti tudi sorazmerno velik del besedila. V skrajnem primeru, če imamo res preveč plovk, se bo odločil za stran popolnoma zapolnjeno s plovkami.
-
-\section{Formati slik}
-Bitne slike, vektorske slike, kakršnekoli slike, z \LaTeX{}om lahko vključimo vse. 
-Slika~\ref{pic1} je v {\tt .pdf} formatu.
 \begin{figure}
 \begin{center}
-\includegraphics[width=10cm]{pic1.pdf}
+\includegraphics[width=10cm]{slike/svetlo-temna-meja.jpg}
 \end{center}
-\caption{Herschelov graf, vektorska grafika.}
-\label{pic1}
+\caption{Začetna, končna in točka svetlo-temne meje na grafu.}
+\label{pic:svet-tem}
 \end{figure}
-Pa res lahko vključimo slike katerihkoli formatov? Žal ne. Programski paket \LaTeX\ lahko uporabljamo v več dialektih. Ukaz {\tt latex} ne mara vključenih slik v formatu Portable Document Format {\tt .pdf}, ukaz {\tt pdflatex} pa ne prebavi slik v Encapsulated Postscript Formatu {\tt .eps}. 
-Strnjeno v Tabeli~\ref{tbl:1}.
+
+Na sliki \ref{pic:svet-tem} je točka »Middle« izračunana svetlo-temna meja. Točki »top« and »bottom« sta pa maksimum in minimum funkcije drugega odvoda. 
+
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=10cm]{slike/svetlo-temna-meja-orig.jpg}
+\end{center}
+\caption{Začetna, končna in točka svetlo temne meje na sliki.}
+\label{pic:svet-tem2}
+\end{figure}
+
+Rumena točka na sliki \ref{pic:svet-tem2} predstavlja svetlo-temno mejo. Zelena začetek nje ali masksimum drugega odvoda funkcije. Modra pa konec svetlo-temne meje ali minimum drugega odvoda funkcije. Rdeča črta prikazuje trenutno izbrano vertikalo. Modri črti sta pa vodilni črti, izračunani z našim programom. Vsaka je postavljena na kotu petih stopinj glede na centralno vertikalno vodilno črto. 
+
+
+\subsection{Iskanje svetlo-temne meje}
+\label{ch:iskanj-sv-t-m}
+Svetlo temno mejo najdemo tako, da zgornje algoritme ponovimo na celotni širini slike. Tukaj nam prav pride paralelno procesiranje. Procesiramo lahko več vertikal hkrati, vsako na svojem jedru procesorja. Microsoft je v .Net 4.0 dodal podporo za paralelno for zanko, ki nam tukaj zelo prav pride. Zanki podamo seznam elementov, ki jih hočemo obdelati. Ta pa jih nato razdeli na vsak procesorska jedra. Sintaksa je preprosta. Cel naš algoritem izgleda tako:
+
+\begin{verbatim}
+rezultat = []
+Parallel.ForEach<int>(sirinaSlike, x =>
+{
+    rezultat.dodaj(najdiSvetloTemnoMejo(slika, x));
+});
+\end{verbatim}
+
+
+Algoritem nam najde vse točke po celotni širini slike za svetlo temno mejo. Vsa jedra procesorja so obremenjena. Več jeder ko imamo (ali boljši računalnik kot je) hitreje deluje algoritem. \\
+Alternativna implementacija je lahko s v naprej kreiranimi nitmi in delavnimi razredi. Kjer se razredu poda kot parameter sliko in koordinate vertikale. Pri koncu pa lahko preko Pub-Sub objekta sporoči rezultate. Lahko se tudi uporabi tudi distribuirano procesiranje na večjih računalnikih, kjer se izvajajo delavni procesi. Te sprejmejo iste parametre kot predhodni primer. Razlika je le v tem, da se te pošljejo po vtičih po lokalni mreži ali preko interneta. To implementacijo bi se dalo izvesti s prosto rešitvijo BeanstalkD [3], ki omogoča preprosto implementacijo vodje in delavnih procesov.\\
+Na koncu nam preostane samo še, da te črte (algoritem vrne svetlo-temno mejo, začetek in konec nje) izrišemo na sliki (slika \ref{pic:svet-tem3}). 
+
+
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=10cm]{slike/svetlo-temna-meja-po-celi-sirini.jpg}
+\end{center}
+\caption{Črte začetka, konca in prehoda svetlo-temne meje.}
+\label{pic:svet-tem3}
+\end{figure}
+
+\subsection{Graf širine svetlo-temne meje}
+Algoritem je sledeč. Za vsako izračunano vertikalo odštejemo višimo črte začetka svetlo-temne meje na sliki in višimo črte konca svetlo-temne meje na sliki. Te vrednosti nato prikažemo na grafu, glede na izbrano enoto (lahko v centimetrih ali kotih v stopinjah).
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=10cm]{slike/graf-sirina-s-t-meja.jpg}
+\end{center}
+\caption{Graf širine svetlo-temne meje.}
+\label{pic:st-sirina}
+\end{figure}
+
+
+Na grafu slika \ref{pic:st-sirina} je na x osi prikazana razdalja v centimetrih od vertikalne vodilne črte. Na y osi pa širina svetlo-temne meje, tudi v centimetrih. V tem primeru širina sega od devet do dvanajst centimetrov.
+
+
+\section{Optimizacija}
+Optimizacija bo potekala na algoritmu za izračun in izris svetlo-temne meje na celotni širini slike (3648 točk). Upoštevane so samo vertikale na intervalu kota 0,25 stopinje. Oddaljenost kamere od zaslona je 920 cm. Računalnik na katerem so testi potekali ima 4 jedrni procesor. Izmerjen čas se je gibal okoli 50 sekund.
+
+\subsection{Slikovni filtri}
+Prve verzije teh algoritmov so uporabljale Microsoftov .Net razred System.Drawing.Bitmap za branje in pisanje točk na/s slike. Ta razred vsebuje dve metodi prva je GetPixel(x,y), ki vrne barvo točke. Druga je SetPixel(x,y,color), ki nastavi barvo točki. Namesto tega sem uporabil direkten dostop do slike, kjer so točke shranjene v zaporedjih štirih elementov R, G, B in A, kjer je A določa transparentnost. Takšen direkten dostop do katerekoli točke na sliki je skrajšal čas algoritma za več kot polovico, na 20 sekund (slika \ref{pic:opt-sf}).
+
+
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=10cm]{slike/optimizacija_grafi/optimizacija-slikovnih-filtrov.jpg}
+\end{center}
+\caption{Vizualna predstavitev pospešitve algoritmov za slikovne filtre.}
+\label{pic:opt-sf}
+\end{figure}
+
+
+\subsection{Paralelno procesiranje}
+Kot sem že omenil v poglavju \ref{ch:iskanj-sv-t-m} sem pri iskanju svetlo-temne meje na vertikalah uporabil paralelno for zanko. Algoritem brez paralelnega procesiranja z izboljšanim branjem in pisanjem slike je potreboval 20 sekund (poleg tega pa .Net knjižnica ne omogoča pisanja v sliko iz večih niti naenkrat, tako da paralelno procesiranje z njo ni bilo mogoče). Z 4 jedrnim procesorjem in paralelnim izvajanjem se je ta čas dvakrat razpolovil na 5 sekund. Tukaj se vidi, da je tak način zelo primeren za naš problem. Prav tako hitrost algoritma narašča z hitrostjo računalnika (če podvojimo enote, ki obdelujejo naš problem, se tudi hitrost algoritma podvoji) (slika \ref{pic:opt-p}).
+
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=10cm]{slike/optimizacija_grafi/optimizacija-s-paralelnim-procesiranjem.jpg}
+\end{center}
+\caption{Vizualna predstavitev pospešitve algoritmov s paralelnim procesiranjem.}
+\label{pic:opt-p}
+\end{figure}
+
+\subsection{Algoritem za glajenje funkcij}
+Po podrobni analizi kode sem ugotovil, da glavni algoritem največ časa porabi pri glajenju funkcije. Začetni algoritem je za vsak element sešteval polovico velikosti okna elementov pred njim in za njim. Ta algoritem sem nato spremenil, da hrani vsoto okna skozi celotno vertikalo. Vsak nov element, ki pride v okno se prišteje k vsoti. Odšteje se pa element, ki zapusti okno. Tako je časovna zahtevnost algoritma padla iz O(velikost okna * n) na O(n). Hitrost algoritma pa na 2 sekundi (slika \ref{pic:opt-g}).
+
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=10cm]{slike/optimizacija_grafi/optimizacija-algoritma-za-glajenje-funkcij.jpg}
+\end{center}
+\caption{Vizualna predstavitev pospešitve algoritma za glajenje funkcije.}
+\label{pic:opt-g}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=10cm]{slike/optimizacija_grafi/celotna-pospesitev.jpg}
+\end{center}
+\caption{Vizualna predstavitev pospešitve algoritmov po optimizaciji.}
+\label{pic:opt-c}
+\end{figure}
+
+Na sliki \ref{pic:opt-c} je prikazana celotna pospešitev algoritmov po optimizaciji. Hitrost izvajanja se je znižal iz 50 sekund na 2 sekundi.
+
+\chapter{Primerjava s fotometrom}
+Test je bil opravljen na levem in desnem žarometu za meglenke. Na pozicijah 0, -2 in +2 stopinj glede na vertikalno vodilno črto. Izmerjene vrednosti so v stopinjah glede na horizontalno vodilno črto.
+
+\section{Levi žaromet}
 
 \begin{table}
 \begin{center}
-\begin{tabular}{l|ccc}
-ukaz/format & {\tt .pdf} & {\tt .eps} & ostali formati \\ \hline
-{\tt pdflatex} & da & ne & da \\
-{\tt latex}   & ne & da  & da
+\begin{tabular}{c|c|c}
+\textbf{Pozicija} & \textbf{Fotometer} & \textbf{Prenosni merilnik} \\ \hline
+0° & -1,26° & -1,26°  \\ \hline
+-2°  & -1,26° & -1,24°   \\ \hline
++2°  & -1,26° & -1,24°   \\ 
 \end{tabular}
 \end{center}
-\caption{}
-\label{tbl:1}
+\caption{Primerjava rezultatov fotometra in prenosnega merilnika za levi žaromet.}
+\label{tbl:primerjava-levi}
 \end{table}
 
-Nasvet? Odločite se za uporabo ukaza {\tt pdflatex}. Vaš izdelek bo brez vmesnih stopenj na voljo v {.pdf} formatu in ga lahko odnesete v vsako tiskarno. Če morate na vsak način vključiti sliko, ki jo imate v {\tt .eps} formatu, jo vnaprej pretvorite v alternativni format, denimo {\tt .pdf}.
+Pri tem žarometu je program (Prenosni merilnik svetlobnih lastnosti žarometov) izračunal rezultate, ki so skoraj isti kot fotometer. Pri 0° je program izračunal isto vrednost kot fotometer. Pri -2°in +2° pa je program izračunal vrednost, ki je za 0,02° različna od fotometra, kar je enako 0,3 cm (tabela \ref{tbl:primerjava-levi}). Podrobni rezultati fotometra se nahajajo v prilogah (\ref{ch:rf}).
 
-Včasih se da v okolju za uporabo programskega paketa \LaTeX\ nastaviti na kakšen način bomo prebavljali vhodne dokumente. Spustni meni na Sliki~\ref{pic2} odkriva uporabo \LaTeX{}a v njegovi pdf inkarnaciji --- {\tt pdflatex}.
+\section{Desni žaromet}
+
+\begin{table}
+\begin{center}
+\begin{tabular}{c|c|c}
+\textbf{Pozicija} & \textbf{Fotometer} & \textbf{Prenosni merilnik} \\ \hline
+0° & -1,02° & -1,23°  \\ \hline
+-2°  & -0,98° & -1,19°   \\ \hline
++2°  & -1,08° & -1,22°   \\ 
+\end{tabular}
+\end{center}
+\caption{Primerjava rezultatov fotometra in prenosnega merilnika za desni žaromet.}
+\label{tbl:primerjava-desni}
+\end{table}
+
+Tukaj je program vrnil pri vseh pozicijah različne rezultate. Razlike so pri poziciji 0° 0,11° (1,63 cm) pri -2° 0,21° (3,11 cm) in pri 2° 0,14° (2,07 cm) (tabela \ref{tbl:primerjava-desni}). Na različne rezultate lahko vpliva več dejavnikov. Lahko je to slaba kvaliteta slike. Lahko so moteči elementi na sliki, kot so vodilne črte. Lahko je drugačna osvetlitev slike. Lahko pa tudi temperatura žarometa krči ali raztegne materiale in so zato drugačni rezultati med enimi ali drugimi meritvami. Podrobni rezultati fotometra se nahajajo v prilogah (\ref{ch:rf}).
+
+\chapter{Zaključne ugotovitve}
+Program vključuje vso funkcionalnost, ki je bila potrebna. Deluje hitro. Je nastavljiv in zna obdelat veliko vrst slik snopov svetlobe.\\
+Dobljeni rezultati so na nekaterih slika še različni od fotometra. Tako, da za nadaljnji razvoj bi bilo potrebno nekatere algoritme še malo spremeniti in določiti najbolj optimalne nastavitve fotoaparata ali kamere.\\
+Med reševanjem problema mi je največjo težavo povzročal izračun druga odvoda. Poizkusil sem veliko možnih rešitev kako čim bolj natančno odvajati funkcijo. Na koncu sem problem rešil tako, da sem funkcijo zgladil in jo šele potem odvajal. Vendar pa so bili tudi tukaj težave. Potrebno je bilo najti postopek kako najti najboljši približek naši originalni funkciji snopa, ki se ga da lepo odvajati. Na tem delu je največja možnost napake ampak tudi najboljša priložnost, da se izboljša natančnost.\\
+Včasih je problem pri obdelavi slike in sicer pri detekciji horizontalnih vodilnih črt. To se še posebej opazi pri žarometih za meglenke, kjer se mejo postavi na zadnjo vodilno črto. Tako sta prvi dve v temi in se ju včasih ne zazna. Moja ideja za izboljšavo je, da fotografija vsebuje en del tal sobe. Tretjo horizontalno črto in tla se nato uporabi kot referenčni točki in se izračuna pozicijo prve in druge vodilne črte.
+
+\chapter{Priloge}
+\section{Rezultati fotometra}
+\label{ch:rf}
+
+
 \begin{figure}
 \begin{center}
-\includegraphics[width=10cm]{pic2.png}
+\includegraphics[width=10cm]{slike/fotometer-desni-0.jpg}
 \end{center}
-\caption{Kateri dialekt uporabljati?}
-\label{pic2}
-\end{figure} 
+\caption{Desni žaromet, pozicija 0°.}
+\label{pic:opt-g}
+\end{figure}
 
-Vključena Slika~\ref{pic2} je seveda bitna.
+\begin{figure}
+\begin{center}
+\includegraphics[width=10cm]{slike/fotometer-desni-+2.jpg}
+\end{center}
+\caption{Desni žaromet, pozicija +2°.}
+\label{pic:opt-g}
+\end{figure}
 
-Kaj pa stran iz študentskega referata?\label{pp}
-Tudi njo lahko vključimo v dokument. Toda ne kot plovko.
- 
+\begin{figure}
+\begin{center}
+\includegraphics[width=10cm]{slike/fotometer-desni--2.jpg}
+\end{center}
+\caption{Desni žaromet, pozicija -2°.}
+\label{pic:opt-g}
+\end{figure}
 
-%\chapter{}
+\begin{figure}
+\begin{center}
+\includegraphics[width=10cm]{slike/fotometer-levi-0.jpg}
+\end{center}
+\caption{Levi žaromet, pozicija 0°.}
+\label{pic:opt-g}
+\end{figure}
 
-\chapter{Kaj pa literatura}
-\label{ch3}
-Kot smo omenili že v uvodu, je pravi način za citiranje literature uporaba \BibTeX{}a~\cite{bib}. 
-Programski paket \LaTeX je prvotno predstavljen v priročniku~\cite{lat} in je v resnici nadgradnja sistema \TeX\ avtorja Donalda Knutha, znanega po denimo, če izpustim njegovo umetnost programiranja, Knuth-Bendixovem algoritmu~\cite{dk1}.
+\begin{figure}
+\begin{center}
+\includegraphics[width=10cm]{slike/fotometer-levi-+2.jpg}
+\end{center}
+\caption{Levi žaromet, pozicija +2°.}
+\label{pic:opt-g}
+\end{figure}
 
-Vsem raziskovalcem s področja računalništva pa svetujem v branje mnenje L.\ Fortnowa~\cite{lf}.
+\begin{figure}
+\begin{center}
+\includegraphics[width=10cm]{slike/fotometer-levi--2.jpg}
+\end{center}
+\caption{Levi žaromet, pozicija -2°.}
+\label{pic:opt-g}
+\end{figure}
 
-\chapter{Zaključek}
-Izbira \LaTeX\ ali ne \LaTeX\ je seveda prepuščena vam samim. Res je, da so prvi koraki v \LaTeX{}u težavni. Ta dokument naj vam služi kot začetna opora pri hoji.
+
 
 \begin{thebibliography}{99}
 \bibitem{lf} L.\ Fortnow, ``Viewpoint: Time for computer science to grow up'',
