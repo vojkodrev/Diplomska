@@ -144,11 +144,11 @@ If I have seen further it is by standing on the shoulders of giants.\\
 \chapter*{Povzetek}
 \chaptermark{}
 Cilj diplomske naloge je razviti program za preverjanje svetilnih lastnosti avtomobilskih žarometov. Vhodni parameter programa je slika snopa svetlobe žarometa. Ta sveti na steno, kjer so narisane vodilne črte. Tri horizontalne in ena vertikalna. Žaromet se postavi tako, da sveti pravokotno na centralno vertikalno in horizontalno sliko. \\
-Program iz slike izračuna prehod svetlo-temne meje po celi širini slike. Uporabnik lahko nato izbere posamezno vertikalo. Njene intenzitete svetlobe se nato prikažejo na grafu.\\
+Program iz slike izračuna prehod svetlo-temne meje po celotni širini slike. Uporabnik lahko nato izbere posamezno vertikalo. Njene intenzitete svetlobe se nato prikažejo na grafu.\\
 Vmesnik je zasnovan na principu vtičnikov. Te se preberejo iz določene mape na disku in naložijo v program dinamično. Vsak v svoj zavihek.\\
 Za komuniciranje med sabo uporabljajo model Publisher-Subscriber. Preko njega se prenašajo slike med posameznimi koraki in drugi parametri.\\
-Vhodna slika se najprej pretvori v črno belo sliko. Nato se črno-beli sliki uporabi Sobelov filter, da se iz nje izlušči vodilne črte. Na tej sliki se izvede še Hough-ova črtna transformacija, kjer se pridobi natačne koordinate črt.\\
-Te se kasneje uporabi za izračun mer na sliki v kotih in centimetrih glede na centralne vertikalne in horizontalne črte (odmik).\\
+Vhodna slika se najprej pretvori v črno belo sliko. Nato se nad črno-belo sliko uporabi Sobelov filter, da se iz nje izlušči vodilne črte. Na tej sliki se izvede še Hough-ova črtna transformacija, kjer se pridobi natančne koordinate črt.\\
+Te se kasneje uporabi za izračun mer na sliki v kotih in centimetrih glede na odmik od centralne vertikalne in horizontalne črte.\\
 Za vsako vertikalo na sliki se izračunajo intenzitete točk. Ugotovi se svetlo-temna meja. Ta je enaka prevojni točki na funkciji intenzitet točk, tam kjer je drugi odvod funkcije enak nič. Iz drugega odvoda se izračuna še začetek (maksimum) in konec (minimum) svetlo-temne meje.\\
 Te tri črte se nariše na sliko in se izračuna širina svetlo-temne meje. To se na koncu prikaže na grafu.\\
 Program je napisan kot alternativa fotometru. To je stroj, ki s pomočjo fotocelice in mehanskega premikanja žarometa ugotavlja svetlo-temno mejo.\\
@@ -163,11 +163,13 @@ Program deluje hitro. Svetlo-temno mejo najde po celotni širini slike na interv
 \addcontentsline{toc}{chapter}{Abstract}
 \chapter*{Abstract}
 
-The goal of this thesis is to develop a program for checking lightness properties of car lights. Input parameter of this program is a picture of a car light's beam. Beam is projected on a wall where guidelines are. Three horizontal and one vertical. \\
+The goal of this thesis is to develop a program for measuring lightness properties of car lights. Input parameter of this program is a picture of a car light's beam. Beam is projected on a wall where guidelines are. Three horizontal and one vertical. \\
 Program calculates from the picture the cut-off line of the beam. This is a transition line from dark to light. User can select a vertical on a picture to see it's light intensities on a chart.\\
 User interface is composed of a set of plug-ins. They are read from a certain directory and loaded into a program dynamically. Each gets it's own tab. They use a Publisher-Subscriber model to communicate with each other. Through it images and other parameters are passed between steps in a procedure.\\
 Input picture is first transformed into a black and white picture. Then a Sobel's filter and Hough's line transformation are used to extract the guidelines. Guidelines are later used to help calculate real distances on the picture in angles and centimetres from the central guideline. \\
-For each vertical on a picture light intensities of pixels are calculated. Then the light cut-off point is calculated which is equal to the inflection point on a curve of light intensities. This is where second derivative of this curve equals zero. Then beginning and end of the cut-off line are calculated (maximum and minimum of second derivative). At the end width of the cut-off line is calculated from this points and shown on a chart.
+For each vertical on a picture light intensities of pixels are calculated. Then the light cut-off point is calculated which is equal to the inflection point on a curve of light intensities. This is where second derivative of this curve equals zero. Then the beginning and the end of the cut-off line are calculated (maximum and minimum of second derivative). At the end width of the cut-off line is calculated from this points and shown on a chart.\\
+Program was written as an alternative to a machine called Photometer which with a help of a light detector and mechanical moving of a car light calculates the cut-off line.\\
+Results of our program are on pair with a Photometer but they are dependant on a quality and lightness of an input picture.
 
 
 \selectlanguage{slovene}
@@ -181,19 +183,19 @@ For each vertical on a picture light intensities of pixels are calculated. Then 
 
 \chapter{Uvod}
 Avtomobilska industrija je zelo zahtevno področje. Dosti konkurence. Dosti povpraševanja. Visoki standardi za varnost in za kvaliteto. Avtomobili se proizvajajo kot na tekočem traku. Vsak upad proizvodnje je drag. Izjemno drag. Tukaj govorimo o več 1000 in celo več 10000 eurih na minuto. Vsak izdelek, ki pride v tovarno in se montira na avtomobile, tovornjake, motorje... mora biti praktično neoporečen. Dovoljenih je le par slabih kosov na celo pošiljko. Zato je potrebno veliko preverjanje kakovosti raznih delov avtomobila in potrebna so orodja, ki nam to omogočajo.\\
-V tej diplomski nalogi se bomo osredotočili na avtomobilske žaromete. Ocenjevali bomo njihovo kakovost. Ne v smislu ta žaromet je zanič ta je dober. Ampak bomo gledali njihove lastnosti. Bolj specifično lastnosti njihovega snopa svetlobe. \\
+V tej diplomski nalogi se bomo osredotočili na avtomobilske žaromete. Ocenjevali bomo njihovo kakovost. Ne v smislu ta žaromet je zanič ali ta je dober. Ampak bomo gledali njihove lastnosti. Bolj specifično lastnosti njihovega snopa svetlobe. \\
 Zanimala nas bo svetlo-temna meja. Njen prehod, oblika in širina. Tehnologije za določanje teh karakteristik že obstajajo. Ena izmed takih je fotometer. Naprava ima veliko pomanjkljivosti. Je velika in mehanska. Zanjo potrebuješ posebej pripravljeno sobo, da zmanjšaš količino napake. Potrebuješ posebne stroje, ki žaromet premikajo. Na koncu pa lahko preverjaš samo en žaromet naenkrat. Poleg tega je pa vsak del naprave potrebno vzdrževati.\\
-Cilj te diplomske naloge je, da razvijemo alternativo te napravi. Ta alternativa bo v obliki računalniškega programa, ki bo obdeloval sliko snopa svetlobe žarometa. Soba bo seveda še vedno potrebna. Manj jo pa bo potrebno zaščititi pred motnjami. Namesto fotometra pa potrebujemo samo fotoaparat ali kamero. Naš program mora tako omogočati vsaj isto funkcionalnost. Mora biti hitrejši in imeti isto natančnost rezultatov.\\
+Cilj te diplomske naloge je, da razvijemo alternativo te napravi. Ta alternativa bo v obliki računalniškega programa, ki bo obdeloval sliko snopa svetlobe žarometa. Soba bo seveda še vedno potrebna. Manj pa jo bo potrebno zaščititi pred motnjami. Namesto fotometra pa potrebujemo samo fotoaparat ali kamero. Naš program mora tako omogočati vsaj isto funkcionalnost. Mora biti hitrejši in imeti isto natančnost rezultatov.\\
 \\
 Diplomska naloga se začne s poglavjem, kjer opišem naš problem in cilje. Opiše se postopek pridobitve slike in prikazana je vhodna slika.\\
 Nato sledi pregled vseh obstoječih rešitev. Sem spada opis fotometra in postopka kako z njim izmerimo svetilne lastnosti žarometa.\\
 Naslednje poglavje opiše razvoj naše aplikacije. Vsebuje zahteve strojne opreme, opis programskih jezikov, ki so na voljo. Nato je opisan uporabniški vmesnik. Na koncu pa celoten postopek obdelave slike in računanje svetlo-temne meje.\\
-Sledi poglavje o optimizaciji naših algoritmov. Opisan je postopek optimizacije. Podani so časi hitrosti algoritmov pred in po optimizaciji.\\
+Sledi poglavje o optimizaciji uporabljenih algoritmov. Opisan je postopek optimizacije. Podani so časi hitrosti algoritmov pred in po optimizaciji.\\
 Na koncu je dodana še primerjava rezultatov našega programa in fotometra.
 
 \chapter{Opis problema}
 Potrebno je narediti program, ki ugotavlja svetlobne lastnosti žarometov. Te lastnosti se potem upoštevajo pri oceni kakovosti žarometa in njegove izdelave. Žarometi so lahko sprednji, s kratkimi ali dolgimi lučmi, zadnji ali pa žarometi za meglenke.
-Z žarometom se posije na steno, kjer so narisane vodilne črte. Te vsebujejo dve centralni črti (horizontalno in vertikalno). In več drugih pomožnih črtkanih črt. Centralni črti sta vsaki na kotih sijanja 0 stopinj in žaromet mora nanju sijati pravokotno. Pri sprednjih žarometih, se tisto stran, ki sije višje nastavi na prvo horizontalno črtkano črto. Pri meglenkah, kjer je cel snop v isti liniji, se žaromet nastavi na zadnjo horizontalno črtkano črto. 
+Z žarometom se posije na steno, kjer so narisane vodilne črte. Te vsebujejo dve centralni črti (horizontalno in vertikalno). In več drugih pomožnih črtkanih črt. Centralni črti sta vsaki na kotih sijanja nič stopinj in žaromet mora nanju sijati pravokotno. Pri sprednjih žarometih, se tisto stran, ki sije višje nastavi na prvo horizontalno črtkano črto. Pri meglenkah, kjer je cel snop v isti liniji, se žaromet nastavi na zadnjo horizontalno črtkano črto. 
 S programom je potrebno najti prehod svetlo-temne meje v stopinjah in centimetrih, oddaljenih glede na horizontalno centralno črto. Potrebno je izračunati širino svetlo-temne meje.
 Sliki \ref{pic:vhp1} in \ref{pic:vhp2} sta primera vhodnih parameterov.
 
@@ -216,7 +218,7 @@ Sliki \ref{pic:vhp1} in \ref{pic:vhp2} sta primera vhodnih parameterov.
 
 \chapter{Sorodne rešitve}
 \section{Fotometer}
-Fotometer je naprava, ki jo v podjetju Hella Saturnus d.o.o. uporabljajo za določanje svetlobnih lastnosti žarometov. Žaromet se privije na optično os. Ta je nasproti fotocelici na razdalji petindvajset metrov. Za svetilke se uporablja razdalja tri metre. \\
+Fotometer je naprava, ki jo v podjetju Hella Saturnus d.o.o. uporabljajo za določanje svetlobnih lastnosti žarometov. Žaromet se privije na optično os. Ta je nasproti fotocelici na razdalji petindvajset metrov. Za svetilke se uporablja razdalja treh metrov. \\
 Žarnice, ki se pri testih uporabljajo so različne od tistih v proizvodnji žarometov. Nitka v žarnici mora biti določene dolžine in je ne sme presegati za več kot milimeter. Daljša nitka lahko premakne svetlo-temno mejo.\\
 Pri merjenju fotocelica stoji na miru. Premika se samo žaromet in sicer v vertikalni smeri. Na vsake 0,01 stopinje se pomeri svetilnost. Tako se ugotovi svetlo-temno mejo. Nahaja se kjer je največji gradient/razlika svetlobe med dvema točkama. Na razdalji 0,01 stopinje svetloba naraste za 20\%, pri kseon žarnicah tudi do 200\%.\\
 Potem se preveri bleščanje žarometa, kjer se žaromet obrne tako da ne sveti v zaslon. Preveri pa se moč svetlobe (pod različnimi koti), ki pada na fotocelico.   \\
@@ -228,7 +230,7 @@ Zahteve za delovanje programa:
 \begin{itemize}
 \item Prenosnik ali osebni računalnik.
 \item Operacijski sistem Windows XP, Vista ali 7.
-\item Instaliran .NET framework 4.0 ali več.
+\item Naložen .NET framework verzije 4.0 ali več.
 \item Intel ali Athlon procesor. 32 ali 64 biten. Priporočeno, da je več jedrni.
 \item Priporočena količina pomnilnika je 2GB.
 \item Velikost diska mora biti dovolj velika za operacijski sistem, .NET framework in slike svetlo-temnih mej. Sam program je velik par MB. 
@@ -237,7 +239,7 @@ Zahteve za delovanje programa:
 \end{itemize}
 
 \section{Uporabljene tehnologije}
-Ena izmed zahtev naročnika programa je bila, da teče na operacijskem sistemu Windows. Pregledal sem več programskih jezikov, ki so na voljo za ta sistem. Moji glavni kriteriji so bili, da je programski jezik objektno usmerjen, da se v njem enostavno zgradi uporabniški vmesnik, in da zanj obstaja integrirano razvojno okolje. Pregledal sem jezike: Java, C\# .Net, Python, Delphi in PHP. Vsi jeziki so objektno usmerjeni, nekateri imajo dobro podporo za računalniški vid, nekateri nimajo avtomatičnega upravljanja s pomnilnikov... Spodaj so našteti dodatni plusi in minusi, ki sem jih ugotovil.
+Ena izmed zahtev naročnika programa je bila, da teče na operacijskem sistemu Windows. Pregledal sem več programskih jezikov, ki so na voljo za ta sistem. Moji glavni kriteriji so bili, da je programski jezik objektno usmerjen, da se v njem enostavno zgradi uporabniški vmesnik, in da zanj obstaja integrirano razvojno okolje. Pregledal sem jezike: Java, C\# .Net, Python, Delphi in PHP. Vsi jeziki so objektno usmerjeni, nekateri imajo dobro podporo za računalniški vid, nekateri nimajo avtomatičnega upravljanja s pomnilnikom... Spodaj so našteti dodatni plusi in minusi, ki sem jih ugotovil.
 
 \subsection{Java}
 \paragraph{Plusi}
@@ -270,6 +272,7 @@ Ena izmed zahtev naročnika programa je bila, da teče na operacijskem sistemu W
 \paragraph{Minusi}
 \begin{itemize}
 \item Slaba podpora za računalniški vid.
+\item Nima avtomatičnega čiščenja pomnilnika.
 \end{itemize}
 
 \subsection{Python}
@@ -342,10 +345,10 @@ Lastnost UserInterface vrne uporabniški vmesnik vtičnika. Ta je lahko standard
 \label{pic:vmesnik3}
 \end{figure}
 
-Funkcija ValidateInput se kliče, ko uporabnik pritisne gumb Refresh. Ta funkcija preveri vse vrednosti v poljih vmesnika, če imajo pravilno vsebino (če je podana širina število, da ni preveliko ali premajhno...). Funkcija ProcessImage se kliče po funkciji ValidateInput. Namenjena je procesiranju in obdelavi slike. Pri vtičniku črno-bela slika ta funkcija spremeni originalno sliko v črno-belo. V vtičniku vodilne črte pa ta funkcija najde vertikalno in dve horizontalni vodilni črti na sliki. Lastnost Name je ime vtičnika, ki je prikazana v imenu zavihka.
+Funkcija ValidateInput se kliče, ko uporabnik pritisne gumb Refresh/Osveži. Ta funkcija preveri vse vrednosti v poljih vmesnika, če imajo pravilno vsebino (če je podana širina število, da ni preveliko ali premajhno...). Funkcija ProcessImage se kliče po funkciji ValidateInput. Namenjena je procesiranju in obdelavi slike. Pri vtičniku črno-bela slika ta funkcija spremeni originalno sliko v črno-belo. V vtičniku vodilne črte pa ta funkcija najde vertikalno in dve horizontalni vodilni črti na sliki. Lastnost Name je ime vtičnika, ki je prikazana v imenu zavihka.
 
 \subsection{Nalaganje vtičnikov}
-Vtičniki niso del glavnega programa. Vsak vtičnik se nahaja v svoji knjižnici, ki se ob zagonu programa dinamično naloži. V programu je določena mapa vtičnikov. Iz te mape se preko .Net knjižnic za Reflection \cite{oreilly-cs} naložijo vse knjižnice. V vsaki knjižnici se poišče implementacijo vmesnika IimagePlugin. Naredi se objekt, iz katerega se prebere uporabniški vmesnik. Tega se doda v nov zavihek z imenom našega vtičnika. Nakoncu se poveže še OnClick dogodek refresh gumba s metodama Validate in ProcessImage. V psevdokodi to zgleda tako:
+Vtičniki niso del glavnega programa. Vsak vtičnik se nahaja v svoji knjižnici, ki se ob zagonu programa dinamično naloži. V programu je določena mapa vtičnikov. Iz te mape se preko knjižnice .Net za Reflection \cite{oreilly-cs} naložijo vse knjižnice s vtičniki. V vsaki knjižnici se poišče implementacijo vmesnika IImagePlugin. Naredi se objekt, iz katerega se prebere uporabniški vmesnik. Tega se doda v nov zavihek z imenom našega vtičnika. Na koncu se poveže še OnClick dogodek refresh gumba z metodama Validate in ProcessImage. V psevdokodi to zgleda tako:
 \begin{verbatim}
 foreach (dll in files_from_dir(plugins))
     foreach (class in dll.get_classes())
@@ -361,7 +364,7 @@ foreach (dll in files_from_dir(plugins))
 \end{verbatim}
 
 \subsection{Publisher-Subscriber model}
-Vtičniki morajo nekako komunicirati med sabo. Slabo pa je, če vedo eden za drugega. Pravilo je, da so čim bolj neodvisni. Za tak primer prav pride vzorec po imenu Publisher-Subscriber \cite{oreilly-cs, oreilly-dp}. Deluje na principu dogodkov. Pri tem modelu nekdo pošilja sporočila, ki lahko vsebujejo slike, mere, velikosti točk... Vsi, ki so prijavljeni na določeno sporočilo, ga prejmejo in obdelajo. Vsebuje dve funkciji:
+Vtičniki morajo nekako komunicirati med sabo. Slabo pa je, če vedo eden za drugega. Pravilo je, da so čim bolj neodvisni. Za tak primer prav pride vzorec po imenu Publisher-Subscriber \cite{oreilly-cs, oreilly-dp}. Deluje na principu dogodkov. Pri tem modelu nekdo pošilja sporočila. Ta lahko vsebujejo slike, mere, velikosti točk... Vsi, ki so prijavljeni na določeno sporočilo, ga nato prejmejo in obdelajo. Vsebuje dve funkciji:
 
 \begin{verbatim}
 class PubSub {
@@ -370,8 +373,8 @@ class PubSub {
 }
 \end{verbatim}
 
-Subscribe funkcija sprejme kot parametra tip sporočila na katerega se prijavljamo. Callback parameter je pa referenca na funkcijo, ki se pokliče, ko nekdo objavi sporočilo s tem tipom. Publish metoda se kliče, ko nekdo hoče objaviti sporočilo tipa T.
-Recimo, da vtičnik za originalno sliko naloži sliko v procesiranje. Ta potem kliče metodo Publish z objektom tipa OriginalPictureLoadedMessage, ki to sliko vsebuje. Naslednjemu vtičniku, ki je prijavljen na ta sporočila, se bo klicala callback metoda. Sliko bo pa dobil preko parametera v callback metodi. Ta vtičnik je v našem programu za pretvorbo v črno belo sliko. Po tem, ko sliko tudi sam pretvori ponovno kliče metodo publish s sporočilom tipa BlackAndWhiteImageMessage. Tega nato prejme naslednji vtičnik in tako naprej.
+Subscribe funkcija sprejme kot tip sporočila parameter, na katerega se prijavljamo. Callback parameter je pa referenca na funkcijo, ki se pokliče, ko nekdo objavi sporočilo s tem tipom. Publish metoda se kliče, ko nekdo hoče objaviti sporočilo tipa T.\\
+Recimo, da vtičnik za originalno sliko naloži sliko v procesiranje. Ta potem kliče metodo Publish z objektom tipa OriginalPictureLoadedMessage. Vtičniku za pretvorbo v črno-belo sliko, ki je prijavljen na to sporočilo se pokliče metoda callback. Preko parametra sprejme sliko iz prvega vtičnika in jo pretvori. Po tem ponovno kliče metodo publish s sporočilom tipa Black\-And\-White\-Image\-Message. Tega nato prejme naslednji vtičnik in tako naprej.
 
 \section{Postopek}
 \subsection{Črno-bela slika}
@@ -382,8 +385,17 @@ L=\dfrac{1}{2}(M+m)
 \label{eq:bw}
 \end{equation}
 
-Kjer je M največja vrednost izmed RGB \cite{RGB} komponent točke. Vsaka točka je določena s tremi vrednostmi. Vsaka določa količino barve. R je za rdečo, G za zeleno in B za modro barvo. Te vrednosti so lahko od 0 do 255. Na tak način lahko opišemo barv. Spremenljivka m je najmanjša vrednost izmed RGB komponent. L je nova vrednost točke za črno-belo sliko. 
-Trenutni algoritem se da pohitriti s paralelnim računanjem točk. Tako bi, pri 4 jedrnem procesorju, v enem koraku, izračunali 4 ali več točk hkrati.
+Kjer je M največja vrednost izmed RGB \cite{RGB} komponent točke. Vsaka točka je določena s tremi vrednostmi. Vsaka vrednost določa količino barve. R je za rdečo, G za zeleno in B za modro barvo. Te vrednosti so lahko od 0 do 255. Na tak način lahko opišemo barv. Spremenljivka m je najmanjša vrednost izmed RGB komponent. L je nova vrednost točke za črno-belo sliko. Algoritem v psevdokodi zgleda tako:
+
+\begin{verbatim}
+for (int i = 0; i < visina(slika); i++)
+    for (int j = 0; i < sirina(slika); j++)
+	    tocka = slika[i][j]
+	    rezultat[i][j].R, G, B = (max_komponenta(tocka) 
+	        + min_komponenta(tocka)) / 2
+\end{verbatim}
+
+
 Rezultat tega koraka je slika \ref{pic:bw}.
 
 
@@ -414,7 +426,8 @@ Rezultat filtra je slika \ref{pic:sobel}.
 \end{figure}
 
 \subsection{Prag}
-S tretjim korakom počistimo sliko iz poglavja \ref{ch:sobel} z algoritmom za določanje pragu \cite{treshold-wiki}. To storimo tako, da za vsako točko pogledamo njeno intenziteto (pri pretvorbi v črno belo sliko imajo vse tri komponente točke isto vrednost). Intenziteta je enaka vrednosti ene izmed RGB komponent. Če je intenziteta večja od vrednosti, ki si jo uporabnik izbere (od 0 do 255), potem na novo sliko vpišemo točko z maksimalno intenziteto (bela pika). Če je ta vrednost manjša od izbrane, vpišemo črno piko. Tako na novi sliki še bolj poudarimo vodilne črte. In zmanjšamo količino šuma (točke, ki niso vodilne črte in ki bi ovirale njihovo detekcijo). Ta algoritem v psevdokodi izgleda tako:
+S tretjim korakom počistimo sliko iz poglavja \ref{ch:sobel} z algoritmom za določanje pragu \cite{treshold-wiki}. To storimo tako, da za vsako točko pogledamo njeno intenziteto 
+\footnote{Pri pretvorbi v črno belo sliko imajo vse tri komponente točke isto vrednost.} Intenziteta je enaka vrednosti ene izmed RGB komponent. Če je intenziteta večja od vrednosti, ki si jo uporabnik izbere \footnote{Intenzitete imajo lahko vrednost od 0 do 255.}, potem na novo sliko vpišemo točko z maksimalno intenziteto. Če je ta vrednost manjša od izbrane, vpišemo točko z minimalno intenziteto \footnote{Bela točka ima intenziteto 255, črna pa intenziteto 0.}. Tako na novi sliki še bolj poudarimo vodilne črte. In zmanjšamo količino šuma (točke, ki niso vodilne črte in ki bi ovirale njihovo detekcijo). Ta algoritem v psevdokodi zgleda tako:
 
 \begin{verbatim}
 for (int i = 0; i < visina(slika); i++)
@@ -448,7 +461,7 @@ lines.Where(l => -5 <= l.Theta && l.Theta <= 5);
 \end{verbatim}
 
 
-Algoritem sprejme sliko pragu Sobelovega filtra. Vrne nam seznam črt, ki imajo večjo relativno jakost od parametra relativeIntensity \cite{hough} in kot med -5 in 5 stopinjami (s tem kotnim pogojem najdemo vertikalne črte, za horizontalne črte uporabimo kote od 85° do 95°). Relativna jakost črte je odvisna od števila belih pik, ki ležijo na črti. Vsaka črta je predstavljena z oddaljenostjo od centralne točke na sliki in kotom. Tako je recimo črta na oddaljenosti 0 in kotom 90 zelo blizu naše prve horizontalne črte, ki jo iščemo. Črta z oddaljenostjo 0 in kotom 0 stopinj pa blizu naše vertikalne vodilne črte \cite{hough}. 
+Algoritem sprejme sliko pragu Sobelovega filtra. Vrne nam seznam črt, ki imajo večjo relativno jakost od parametra relativeIntensity \cite{hough} in kot med -5 in 5 stopinjami \footnote{S tem kotnim pogojem najdemo vertikalne črte, za horizontalne črte uporabimo kote od 85° do 95°}. Relativna jakost črte je odvisna od števila belih pik, ki ležijo na črti. Vsaka črta je predstavljena z oddaljenostjo od centralne točke na sliki in kotom naklona. Tako je črta na oddaljenosti 0 in kotom 90 zelo blizu naše iskane prve horizontalne črte. Črta z oddaljenostjo 0 in kotom 0 stopinj pa blizu naše iskane vertikalne vodilne črte \cite{hough}. 
 
 \begin{figure}
 \begin{center}
@@ -461,7 +474,7 @@ Algoritem sprejme sliko pragu Sobelovega filtra. Vrne nam seznam črt, ki imajo 
 Te črte (slika \ref{pic:vodilne-crte}) se nato uporabijo za določitev mer na sliki (v kotih in centimetrih). Uporabnik vnese razdaljo med horizontalnima črtama in razdaljo od zaslona do kamere (v centimetrih). Iz tega lahko izračunamo koliko točk na sliki je en centimeter. Formula za izračun je formula \ref{eq:ps}.
 
 \begin{equation}
-v=\dfrac{a}{|r1-r2|}
+v=\dfrac{a}{|r_1-r_2|}
 \label{eq:ps}
 \end{equation}
 
@@ -477,7 +490,7 @@ tan(\alpha)=\dfrac{a}{b}
 A je oddaljenost, v cm, trenutne točke od centralne vodilne črte. B je oddaljenost zaslona od kamere. Alfa je kot, ki ga iščemo.
 
 \subsection{Pregled intenzitet po vertikali}
-Ta korak je glavni za določitev svetlo temne meje. To storimo tako, da izberemo vertikalo na sliki in pogledamo intenzitete njenih točk (0 do višine naše slike). Za sliko uporabimo črno belo sliko iz prvega koraka. Intenzitete nato izrišemo na grafu (slika \ref{pic:intenzitete1} in slika \ref{pic:intenzitete2}).
+Ta korak je glavni za določitev svetlo-temne meje. To storimo tako, da izberemo vertikalo na sliki in pogledamo intenzitete njenih točk (0 do višine naše slike). Za sliko uporabimo črno-belo sliko iz prvega koraka. Intenzitete nato izrišemo na grafu (slika \ref{pic:intenzitete1} in slika \ref{pic:intenzitete2}).
 
 \begin{figure}
 \begin{center}
@@ -495,7 +508,8 @@ Ta korak je glavni za določitev svetlo temne meje. To storimo tako, da izberemo
 \label{pic:intenzitete2}
 \end{figure}
 
-Os x grafu slika \ref{pic:intenzitete1} predstavlja oddaljenost v stopinjah (\ref{pic:intenzitete2} v cm), od horizontalne vodilne črte. Na y osi je prikazana intenziteta točke. Primer tega algoritma v psevdokodi zgleda tako:
+Os x grafu iz slike \ref{pic:intenzitete1} predstavlja oddaljenost v stopinjah (graf iz slike \ref{pic:intenzitete2} v cm), od horizontalne vodilne črte. Na y osi je prikazana intenziteta točke. \\ 
+Primer algoritma v psevdokodi zgleda tako:
 
 
 \begin{verbatim}
@@ -504,17 +518,17 @@ for (int i = 0; i < visina(slika); i++)
     rezulat.dodaj(new XY(pretvori(i, enota), vrednost))
 \end{verbatim}
 
-Algoritem sprejme kot vhodni parameter sliko svetlo-temne meje. Prebere iz trenutne vrstice z indeksom i vrednost (intenziteta) v stolpcu x (naša vertikala). Pretvori koordinate vrstice i v izbrano enoto (stopinje ali centimetri). Na koncu shrani intenziteto in koordinate vrstice v seznam XY parov.
+Algoritem sprejme kot vhodni parameter sliko svetlo-temne meje. Prebere iz trenutne vrstice, z indeksom i, vrednost (intenziteto) iz stolpca x (naša vertikala). Pretvori koordinate vrstice i v izbrano enoto (stopinje ali centimetri). Na koncu shrani intenziteto in koordinate vrstice v seznam parov XY.
 
 \subsection{Iskanje svetlo-temne meje}
-Za svetlo temno mejo vzamemo prevojno točko na grafu. Ta točka se nahaja kjer je drugi odvod funkcije 0. Za izračun drugega odvoda uporabimo formulo \ref{eq:d2} \cite{second-d}.
+Za svetlo temno mejo vzamemo prevojno točko na grafu. Ta točka se nahaja kjer je drugi odvod funkcije naših intenzitet enak nič. Za izračun drugega odvoda uporabimo formulo \ref{eq:d2} \cite{second-d}.
 
 \begin{equation}
 d2=f(x+1) - 2f(x) + f(x-1)
 \label{eq:d2}
 \end{equation}
 
-Kjer je f(x+1) naslednja točka na funkciji, f(x) trenutna in f(x-1) prejšnja točka. Funkcijo predstavimo s seznamom parov (X in Y) vrednosti tipa double. Pari so urejeni naraščajoče po vrednosti Y. Algoritem za izračun sprejme kot parameter našo funkcijo (spremenljivka f spodaj), vrne pa funkcijo drugega odvoda (d). Začnemo na drugem elementu v našem seznamu (zato, ker formula potrebuje prejšnji element). Končamo na predzadnjem elementu (ker formula potrebuje zadnji element).
+Kjer je f(x+1) naslednja točka na funkciji, f(x) trenutna in f(x-1) prejšnja točka. Funkcijo predstavimo s seznamom parov (X in Y). Pari so urejeni naraščajoče po vrednosti Y. Algoritem za izračun sprejme kot parameter našo funkcijo (spremenljivka f spodaj), vrne pa funkcijo drugega odvoda (d). Začnemo na drugem elementu v našem seznamu (zato, ker formula potrebuje prejšnji element). Končamo pa na predzadnjem elementu (ker formula potrebuje zadnji element).
 
 \begin{verbatim}
 For (i = 1; i < dolzina(f) – 1; i++) 
@@ -533,7 +547,7 @@ Slika \ref{pic:d2} prikazuje rezultat algoritma. Iz nje težko določimo katera 
 \end{figure}
 
 \subsection{Glajenje funkcije}
-V našem programu funkcijo gladimo tako, da jo povprečimo. Velikost okna (okno je število elementov, ki jih vzamemo v povprečje, ko računamo trenutni element) je nastavljiva s strani uporabnika. Obstaja več načinov kako povprečiti funkcijo. V povprečje lahko upoštevamo samo elemente pred trenutnim, lahko samo elemente za trenutnim. Najbolje se odnese, če vzamemo polovico velikosti okna elementov pred trenutnim in polovico elementov za. Torej, če je naše okno veliko deset, začnemo s šestim elementom, k njemu prištejemo pet elementov pred njim in pet za njim. Število, ki ga dobimo delimo s enajst in to je naš rezultat za trenutni element. Nadaljujemo dokler nam elementov/točk v naši originalni funkciji ne zmanjka. 
+V našem programu funkcijo gladimo tako, da jo povprečimo. Velikost okna\footnote{Okno je število elementov, ki jih vzamemo v povprečje, ko računamo trenutni element} je nastavljiva s strani uporabnika. Obstaja več načinov kako povprečiti funkcijo. V povprečje lahko upoštevamo samo elemente pred trenutnim, lahko samo elemente za trenutnim. Najbolje se odnese, če vzamemo polovico velikosti okna elementov pred trenutnim in polovico elementov za trenutnim. Torej, če je naše okno veliko deset, začnemo s šestim elementom, k njemu prištejemo pet elementov pred njim in pet za njim. Število, ki ga dobimo delimo s enajst in to je naš rezultat za trenutni element. Nadaljujemo dokler nam elementov v naši originalni funkciji ne zmanjka. 
 
 \begin{verbatim}
 a = dolzina(f) / 2
@@ -591,7 +605,7 @@ n &= y_1-k*x_1 \nonumber \\
 z &= (-n/k) \label{eq:linint}
 \end{align} 
 
-Z predstavlja x koordinato kjer se nahaja ničla na naši funkciji drugega odvoda in posledično točka svetlo-temne meje na naši originalni funkciji.
+Z predstavlja x koordinato kjer se nahaja ničla na naši funkciji drugega odvoda in posledično točka svetlo-temne meje na naši originalni funkciji. To točko nato izrišemo na grafu (slika \ref{pic:svet-tem}) in na naši originalni sliki (\ref{pic:svet-tem2}).
 
 \begin{figure}
 \begin{center}
@@ -617,7 +631,7 @@ Rumena točka na sliki \ref{pic:svet-tem2} predstavlja svetlo-temno mejo. Zelena
 
 \subsection{Iskanje svetlo-temne meje}
 \label{ch:iskanj-sv-t-m}
-Svetlo temno mejo najdemo tako, da zgornje algoritme ponovimo na celotni širini slike. Tukaj nam prav pride paralelno procesiranje. Procesiramo lahko več vertikal hkrati, vsako na svojem jedru procesorja. Microsoft je v .Net 4.0 dodal podporo za paralelno for zanko, ki nam tukaj zelo prav pride. Zanki podamo seznam elementov, ki jih hočemo obdelati. Ta pa jih nato razdeli na vsak procesorska jedra. Sintaksa je preprosta. Cel naš algoritem izgleda tako:
+Svetlo temno mejo najdemo tako, da zgornje algoritme ponovimo na celotni širini slike. Tukaj nam prav pride paralelno procesiranje. Procesiramo lahko več vertikal hkrati, vsako na svojem jedru procesorja. Microsoft je v .Net 4.0 dodal podporo za paralelno for zanko, ki nam tukaj zelo prav pride in olajša delo. Zanki podamo seznam elementov, ki jih hočemo obdelati. Ta pa jih nato razdeli na vsak procesorska jedra. Sintaksa je preprosta. Cel naš algoritem izgleda tako:
 
 \begin{verbatim}
 rezultat = []
@@ -629,8 +643,8 @@ Parallel.ForEach<int>(sirinaSlike, x =>
 
 
 Algoritem nam najde vse točke po celotni širini slike za svetlo temno mejo. Vsa jedra procesorja so obremenjena. Več jeder ko imamo (ali boljši računalnik kot je) hitreje deluje algoritem. \\
-Alternativna implementacija je lahko s v naprej kreiranimi nitmi in delavnimi razredi. Kjer se razredu poda kot parameter sliko in koordinate vertikale. Pri koncu pa lahko preko Pub-Sub objekta sporoči rezultate. Lahko se tudi uporabi tudi distribuirano procesiranje na večjih računalnikih, kjer se izvajajo delavni procesi. Te sprejmejo iste parametre kot predhodni primer. Razlika je le v tem, da se te pošljejo po vtičih po lokalni mreži ali preko interneta. To implementacijo bi se dalo izvesti s prosto rešitvijo BeanstalkD \cite{beanstalkd}, ki omogoča preprosto implementacijo vodje in delavnih procesov.\\
-Na koncu nam preostane samo še, da te črte (algoritem vrne svetlo-temno mejo, začetek in konec nje) izrišemo na sliki (slika \ref{pic:svet-tem3}). 
+Alternativna implementacija je lahko s v naprej kreiranimi nitmi in delavnimi razredi. Razredu se poda kot parameter sliko in koordinate vertikale. Na koncu pa preko Pub-Sub objekta sporoči rezultate. Lahko se uporabi tudi distribuirano procesiranje na več računalnikih, kjer se izvajajo delavni procesi. Te procesi sprejmejo iste parametre kot predhodni primer. Razlika je le v tem, da se parametri pošljejo preko vtičnic po lokalni mreži ali preko interneta. To implementacijo bi se dalo izvesti s prosto rešitvijo BeanstalkD \cite{beanstalkd}, ki omogoča preprosto implementacijo vodje in delavnih procesov.\\
+Na koncu nam preostane samo še, da te črte (algoritem vrne svetlo-temno mejo, začetek in konec nje) izrišemo na sliki (\ref{pic:svet-tem3}). 
 
 
 
@@ -658,10 +672,10 @@ Na grafu slika \ref{pic:st-sirina} je na x osi prikazana razdalja v centimetrih 
 
 
 \section{Optimizacija}
-Optimizacija bo potekala na algoritmu za izračun in izris svetlo-temne meje na celotni širini slike (3648 točk). Upoštevane so samo vertikale na intervalu kota 0,25 stopinje. Oddaljenost kamere od zaslona je 920 cm. Računalnik na katerem so testi potekali ima 4 jedrni procesor. Izmerjen čas se je gibal okoli 50 sekund.
+Optimizacija je potekala na algoritmu za izračun in izris svetlo-temne meje na celotni širini slike (3648 točk). Upoštevane so samo vertikale na intervalu kota 0,25 stopinje. Oddaljenost kamere od zaslona je 920 cm. Računalnik na katerem so testi potekali ima 4 jedrni procesor. Izmerjen čas prvotnih algoritmov se je gibal okoli 50 sekund.
 
 \subsection{Slikovni filtri}
-Prve verzije teh algoritmov so uporabljale Microsoftov .Net razred System.Drawing.Bitmap za branje in pisanje točk na/s slike. Ta razred vsebuje dve metodi prva je GetPixel(x,y), ki vrne barvo točke. Druga je SetPixel(x,y,color), ki nastavi barvo točki. Namesto tega sem uporabil direkten dostop do slike, kjer so točke shranjene v zaporedjih štirih elementov R, G, B in A, kjer je A določa transparentnost. Takšen direkten dostop do katerekoli točke na sliki je skrajšal čas algoritma za več kot polovico, na 20 sekund (slika \ref{pic:opt-sf}).
+Prve verzije teh algoritmov so uporabljale Microsoftov .Net razred System.\-Drawing.\-Bitmap za branje in pisanje točk na/s slike. Ta razred vsebuje dve metodi prva je GetPixel(x,y), ki vrne barvo točke. Druga je SetPixel(x,y,color), ki nastavi barvo točki. Namesto tega sem uporabil direkten dostop do slike, kjer so točke shranjene v zaporedjih štirih komponent R, G, B in A\footnote{Komponenta A določa transparentnost.}. Takšen direkten dostop do katerekoli točke na sliki je skrajšal čas algoritma za več kot polovico, na 20 sekund (slika \ref{pic:opt-sf}).
 
 
 
@@ -675,7 +689,7 @@ Prve verzije teh algoritmov so uporabljale Microsoftov .Net razred System.Drawin
 
 
 \subsection{Paralelno procesiranje}
-Kot sem že omenil v poglavju \ref{ch:iskanj-sv-t-m} sem pri iskanju svetlo-temne meje na vertikalah uporabil paralelno for zanko. Algoritem brez paralelnega procesiranja z izboljšanim branjem in pisanjem slike je potreboval 20 sekund (poleg tega pa .Net knjižnica ne omogoča pisanja v sliko iz večih niti naenkrat, tako da paralelno procesiranje z njo ni bilo mogoče). Z 4 jedrnim procesorjem in paralelnim izvajanjem se je ta čas dvakrat razpolovil na 5 sekund. Tukaj se vidi, da je tak način zelo primeren za naš problem. Prav tako hitrost algoritma narašča z hitrostjo računalnika (če podvojimo enote, ki obdelujejo naš problem, se tudi hitrost algoritma podvoji) (slika \ref{pic:opt-p}).
+Kot sem že omenil v poglavju \ref{ch:iskanj-sv-t-m} sem pri iskanju svetlo-temne meje na vertikalah uporabil paralelno for zanko. Algoritem brez paralelnega procesiranja z izboljšanim branjem in pisanjem slike je potreboval 20 sekund\footnote{Poleg tega pa knjižnica .Net ne omogoča pisanja v sliko iz več niti naenkrat, tako da paralelno procesiranje z njo ni bilo mogoče.}. Z 4 jedrnim procesorjem in paralelnim izvajanjem se je ta čas dvakrat razpolovil na 5 sekund. Tukaj se vidi, da je tak način zelo primeren za naš problem. Prav tako hitrost algoritma narašča z hitrostjo računalnika (če podvojimo enote, ki obdelujejo naš problem, se tudi hitrost algoritma podvoji) (slika \ref{pic:opt-p}).
 
 
 \begin{figure}
@@ -743,11 +757,11 @@ Pri tem žarometu je program (Prenosni merilnik svetlobnih lastnosti žarometov)
 \label{tbl:primerjava-desni}
 \end{table}
 
-Tukaj je program vrnil pri vseh pozicijah različne rezultate. Razlike so pri poziciji 0° 0,11° (1,63 cm) pri -2° 0,21° (3,11 cm) in pri 2° 0,14° (2,07 cm) (tabela \ref{tbl:primerjava-desni}). Na različne rezultate lahko vpliva več dejavnikov. Lahko je to slaba kvaliteta slike. Lahko so moteči elementi na sliki, kot so vodilne črte. Lahko je drugačna osvetlitev slike. Lahko pa tudi temperatura žarometa krči ali raztegne materiale in so zato drugačni rezultati med enimi ali drugimi meritvami. Podrobni rezultati fotometra se nahajajo v prilogah (\ref{ch:rf}).
+Tukaj je program vrnil različne rezultate pri vseh pozicijah. Razlike so pri poziciji 0° 0,11° (1,63 cm) pri -2° 0,21° (3,11 cm) in pri 2° 0,14° (2,07 cm) (tabela \ref{tbl:primerjava-desni}). Na različne rezultate lahko vpliva več dejavnikov. Lahko je to slaba kvaliteta slike. Lahko so moteči elementi na sliki, kot so vodilne črte. Lahko je drugačna osvetlitev slike. Lahko pa tudi temperatura žarometa krči ali raztegne materiale in so zato drugačni rezultati med enimi ali drugimi meritvami. Podrobni rezultati fotometra se nahajajo v prilogah (\ref{ch:rf}).
 
 \chapter{Zaključne ugotovitve}
 Program vključuje vso funkcionalnost, ki je bila potrebna. Deluje hitro. Je nastavljiv in zna obdelat veliko vrst slik snopov svetlobe.\\
-Dobljeni rezultati so na nekaterih slika še različni od fotometra. Tako, da za nadaljnji razvoj bi bilo potrebno nekatere algoritme še malo spremeniti in določiti najbolj optimalne nastavitve fotoaparata ali kamere.\\
+Dobljeni rezultati so na nekaterih slikah še različni od fotometra. Tako, da za nadaljnji razvoj bi bilo potrebno nekatere algoritme še malo spremeniti in določiti najbolj optimalne nastavitve fotoaparata ali kamere.\\
 Med reševanjem problema mi je največjo težavo povzročal izračun druga odvoda. Poizkusil sem veliko možnih rešitev kako čim bolj natančno odvajati funkcijo. Na koncu sem problem rešil tako, da sem funkcijo zgladil in jo šele potem odvajal. Vendar pa so bili tudi tukaj težave. Potrebno je bilo najti postopek kako najti najboljši približek naši originalni funkciji snopa, ki se ga da lepo odvajati. Na tem delu je največja možnost napake ampak tudi najboljša priložnost, da se izboljša natančnost.\\
 Včasih je problem pri obdelavi slike in sicer pri detekciji horizontalnih vodilnih črt. To se še posebej opazi pri žarometih za meglenke, kjer se mejo postavi na zadnjo vodilno črto. Tako sta prvi dve v temi in se ju včasih ne zazna. Moja ideja za izboljšavo je, da fotografija vsebuje en del tal sobe. Tretjo horizontalno črto in tla se nato uporabi kot referenčni točki in se izračuna pozicijo prve in druge vodilne črte.
 
