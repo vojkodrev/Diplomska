@@ -375,14 +375,14 @@ Recimo, da vtičnik za originalno sliko naloži sliko v procesiranje. Ta potem k
 
 \section{Postopek}
 \subsection{Črno-bela slika}
-Prvi korak v postopku je pretvorba slike v črno belo. To storimo tako, da za vsako piko na sliki izračunamo novo vrednost po formuli \ref{eq:bw}.
+Prvi korak v postopku je pretvorba slike v črno belo. To storimo tako, da za vsako piko na sliki izračunamo novo vrednost po formuli \ref{eq:bw} \cite{LHS}.
 
 \begin{equation}
 L=\dfrac{1}{2}(M+m)
 \label{eq:bw}
 \end{equation}
 
-Kjer je M največja vrednost izmed RGB komponent točke. Vsaka točka je določena s tremi vrednostmi. Vsaka določa količino barve. R je za rdečo, G za zeleno in B za modro barvo. Te vrednosti so lahko od 0 do 255. Na tak način lahko opišemo barv. Spremenljivka m je najmanjša vrednost izmed RGB komponent. L je nova vrednost točke za črno-belo sliko. 
+Kjer je M največja vrednost izmed RGB \cite{RGB} komponent točke. Vsaka točka je določena s tremi vrednostmi. Vsaka določa količino barve. R je za rdečo, G za zeleno in B za modro barvo. Te vrednosti so lahko od 0 do 255. Na tak način lahko opišemo barv. Spremenljivka m je najmanjša vrednost izmed RGB komponent. L je nova vrednost točke za črno-belo sliko. 
 Trenutni algoritem se da pohitriti s paralelnim računanjem točk. Tako bi, pri 4 jedrnem procesorju, v enem koraku, izračunali 4 ali več točk hkrati.
 Rezultat tega koraka je slika \ref{pic:bw}.
 
@@ -830,6 +830,11 @@ https://github.com/kr/beanstalkd
 
 \bibitem{second-d} (2012) Finite difference, Wikipedia. Dostopno na:\\ 
 http://en.wikipedia.org/wiki/Finite\_difference
+
+\bibitem{RGB} Charles A. Poynton (2003). Digital Video and HDTV: Algorithms and Interfaces. Morgan Kaufmann. ISBN 1558607927.
+
+\bibitem{LHS} (2012) Lightness, Hue, Saturation, Wikipedia. Dostopno na: \\
+http://en.wikipedia.org/wiki/HSL\_color\_space
 
 \end{thebibliography}
 \end{document}
