@@ -397,7 +397,8 @@ Rezultat tega koraka je slika \ref{pic:bw}.
 \end{figure}
 
 \subsection{Sobelov filter}
-Drugi korak v našem postopku je uporaba Sobelovega filtra. Ta nam pomaga kasneje pri odkrivanju  vodilnih črt na sliki. Tukaj je bila uporabljena knjižnica za računalniški vid Aforge.NET \cite{sobel}, kjer je ta filter že implementiran. Potreben je klic funkcije:
+\label{ch:sobel}
+Drugi korak v našem postopku je uporaba Sobelovega filtra \cite{sobel-wiki}. Ta nam pomaga kasneje pri odkrivanju  vodilnih črt na sliki. Tukaj je bila uporabljena knjižnica za računalniški vid Aforge.NET \cite{sobel}, kjer je ta filter že implementiran. Potreben je klic funkcije:
 \begin{verbatim}
 sobel = new SobelEdgeDetector().Apply(crnobelaslika);
 \end{verbatim}
@@ -413,7 +414,8 @@ Rezultat filtra je slika \ref{pic:sobel}.
 \end{figure}
 
 \subsection{Prag}
-S tretjim korakom počistimo sliko iz poglavja Sobelov filter. To storimo tako, da za vsako točko pogledamo njeno intenziteto (pri pretvorbi v črno belo sliko imajo vse tri komponente točke isto vrednost). Intenziteta je enaka vrednosti ene izmed RGB komponent. Če je intenziteta večja od vrednosti, ki si jo uporabnik izbere (od 0 do 255), potem na novo sliko vpišemo točko z maksimalno intenziteto (bela pika). Če je ta vrednost manjša od izbrane, vpišemo črno piko. Tako na novi sliki še bolj poudarimo vodilne črte. In zmanjšamo količino šuma (točke, ki niso vodilne črte in ki bi ovirale njihovo detekcijo). Ta algoritem v psevdokodi izgleda tako:
+S tretjim korakom počistimo sliko iz poglavja \ref{ch:sobel} z algoritmom za določanje pragu \cite{treshold-wiki}. To storimo tako, da za vsako točko pogledamo njeno intenziteto (pri pretvorbi v črno belo sliko imajo vse tri komponente točke isto vrednost). Intenziteta je enaka vrednosti ene izmed RGB komponent. Če je intenziteta večja od vrednosti, ki si jo uporabnik izbere (od 0 do 255), potem na novo sliko vpišemo točko z maksimalno intenziteto (bela pika). Če je ta vrednost manjša od izbrane, vpišemo črno piko. Tako na novi sliki še bolj poudarimo vodilne črte. In zmanjšamo količino šuma (točke, ki niso vodilne črte in ki bi ovirale njihovo detekcijo). Ta algoritem v psevdokodi izgleda tako:
+
 \begin{verbatim}
 for (int i = 0; i < visina(slika); i++)
     for (int j = 0; i < sirina(slika); j++)
@@ -435,7 +437,7 @@ Algoritem kot vhodni parameter sprejme bitno sliko in vrednost pragu. Kot rezult
 
 
 \subsection{Iskanje vodilnih črt}
-V tem koraku iščemo prvi dve horizontalni vodilni črti (od zgoraj navzdol). In sredinsko vertikalno vodilno črto. Tukaj je uporabljena Hough-jeva črtna transformacija, ki se uporablja za detekcijo črt na sliki. Tudi ta je že implementirana v Aforge.NET knjižnici \cite{hough}. Primer klica za Hough-jevo transformacijo je:
+V tem koraku iščemo prvi dve horizontalni vodilni črti (od zgoraj navzdol). In sredinsko vertikalno vodilno črto. Tukaj je uporabljena Hough-jeva črtna transformacija \cite{hough-wiki}, ki se uporablja za detekcijo črt na sliki. Tudi ta je že implementirana v Aforge.NET knjižnici \cite{hough}. Primer klica za Hough-jevo transformacijo je:
 
 \begin{verbatim}
 HoughLineTransformation hlt = new HoughLineTransformation();
@@ -505,7 +507,7 @@ for (int i = 0; i < visina(slika); i++)
 Algoritem sprejme kot vhodni parameter sliko svetlo-temne meje. Prebere iz trenutne vrstice z indeksom i vrednost (intenziteta) v stolpcu x (naša vertikala). Pretvori koordinate vrstice i v izbrano enoto (stopinje ali centimetri). Na koncu shrani intenziteto in koordinate vrstice v seznam XY parov.
 
 \subsection{Iskanje svetlo-temne meje}
-Za svetlo temno mejo vzamemo prevojno točko na grafu. Ta točka se nahaja kjer je drugi odvod funkcije 0. Za izračun drugega odvoda uporabimo formulo \ref{eq:d2}.
+Za svetlo temno mejo vzamemo prevojno točko na grafu. Ta točka se nahaja kjer je drugi odvod funkcije 0. Za izračun drugega odvoda uporabimo formulo \ref{eq:d2} \cite{second-d}.
 
 \begin{equation}
 d2=f(x+1) - 2f(x) + f(x-1)
@@ -819,6 +821,15 @@ https://github.com/kr/beanstalkd
 \bibitem{oreilly-dp} Eric Freeman, Elisabeth Robson, Bert Bates, Kathy Sierra, Head First Design Patterns, O'Reilly, 2004, ISBN:978-0-596-00712-6 | ISBN 10:0-596-00712-4
 
 \bibitem{oreilly-cs} Andrew Stellman, Jennifer Greene, Head First C\#, O'Reilly, 2007, ISBN:978-0-596-51482-2 | ISBN 10:0-596-51482-4
+
+\bibitem{hough-wiki} Shapiro, Linda and Stockman, George. "Computer Vision", Prentice-Hall, Inc. 2001
+
+\bibitem{sobel-wiki} K. Engel (2006). Real-time volume graphics,. pp. 112–114.
+
+\bibitem{treshold-wiki} Gonzalez, Rafael C. \& Woods, Richard E. (2002). Thresholding. In Digital Image Processing, pp. 595–611. Pearson Education. ISBN 81-7808-629-8
+
+\bibitem{second-d} (2012) Finite difference, Wikipedia. Dostopno na:\\ 
+http://en.wikipedia.org/wiki/Finite\_difference
 
 \end{thebibliography}
 \end{document}
