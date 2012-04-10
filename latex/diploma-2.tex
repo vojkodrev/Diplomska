@@ -29,6 +29,19 @@
 %\newtheorem{trditev}{Trditev}[izrek]
 \newenvironment{dokaz}{\emph{Dokaz.}\ }{\hspace{\fill}{$\Box$}}
 
+
+\newcommand{\slika}[3]{
+	\begin{figure}
+	\begin{center}
+	\includegraphics[keepaspectratio=true,width=9cm, height=9cm]{#1}
+	\end{center}
+	\vspace{-20pt}
+	\caption{#2}
+	\label{#3}
+	\end{figure}
+}
+
+
 \begin{document}
 \selectlanguage{slovene}
 \frontmatter
@@ -145,7 +158,7 @@ If I have seen further it is by standing on the shoulders of giants.\\
 \addcontentsline{toc}{chapter}{Povzetek}
 \chapter*{Povzetek}
 \chaptermark{}
-Cilj diplomske naloge je razviti program za preverjanje svetilnih lastnosti avtomobilskih žarometov. Vhodni parameter programa je slika snopa svetlobe žarometa. Ta sveti na steno, kjer so narisane vodilne črte. Tri horizontalne in ena vertikalna. Žaromet se postavi tako, da sveti pravokotno na centralno vertikalno in horizontalno sliko. Program iz slike izračuna prehod svetlo-temne meje po celotni širini slike. Uporabnik lahko izbere posamezno vertikalo. Njene intenzitete svetlobe se nato prikažejo na grafu. Vmesnik je zasnovan na principu vtičnikov. Te se preberejo iz določene mape na disku in naložijo v program dinamično. Vsak v svoj zavihek. Za komuniciranje med sabo uporabljajo model založnik-naročnik. Preko njega se prenašajo slike med posameznimi koraki in drugi parametri. Vhodna slika se najprej pretvori v črno belo sliko. Nato se na črno-beli sliki uporabi Sobelov filter, da se iz nje izlušči vodilne črte. Na tej sliki se izvede še Houghova črtna transformacija, kjer se pridobi natančne koordinate črt. Te se kasneje uporabi za izračun mer na sliki v kotih in centimetrih glede na odmik od centralne vertikalne in horizontalne črte. Za vsako vertikalo na sliki se izračunajo intenzitete točk. Ugotovi se svetlo-temna meja. Ta je enaka prevojni točki na funkciji intenzitet točk, kjer je drugi odvod funkcije enak nič. Iz drugega odvoda se izračuna še začetek (maksimum) in konec (minimum) svetlo-temne meje. Te tri črte narišemo na sliko in izračunamo širino svetlo-temne meje. To na koncu prikažemo na grafu. Program je napisan kot alternativa fotometru. To je stroj, ki s pomočjo fotocelice in mehanskega premikanja žarometa ugotavlja svetlo-temno mejo. Rezultati programa so primerljivi z njim. So pa dosti odvisni od kvalitete in osvetlitve slike. Program deluje hitro. Svetlo-temno mejo najde po celotni širini slike na intervalu kota 0,25° v dveh sekundah.
+Cilj diplomske naloge je razviti program za preverjanje svetilnih lastnosti avtomobilskih žarometov. Vhodni parameter programa je slika snopa svetlobe žarometa. Ta sveti na steno (zaslon), kjer so narisane vodilne črte. Tri horizontalne in ena vertikalna. Žaromet se postavi tako, da sveti pravokotno na centralno vertikalno in horizontalno črto. Program iz slike izračuna prehod svetlo-temne meje po celotni širini slike. Uporabnik lahko izbere posamezno vertikalo. Njene intenzitete svetlobe se nato prikažejo na grafu. Vmesnik je zasnovan na principu vtičnikov. Te se preberejo iz določene mape na disku in naložijo v program dinamično. Vsak v svoj zavihek. Za komuniciranje med sabo uporabljajo model založnik-naročnik. Preko njega se prenašajo slike in drugi parametri med posameznimi koraki. Vhodna slika se najprej pretvori v črno-belo sliko. Nato se na črno-beli sliki uporabi Sobelov filter, da se iz nje izlušči vodilne črte. Na tej sliki se izvede še Houghova črtna transformacija, kjer se pridobi natančne koordinate črt. Te se kasneje uporabi za izračun mer na sliki v kotih in centimetrih glede na odmik od centralne vertikalne in horizontalne črte. Za vsako vertikalo na sliki se izračunajo intenzitete točk. Ugotovi se svetlo-temna meja. Ta je enaka prevojni točki na funkciji intenzitet točk, kjer je drugi odvod funkcije enak nič. Iz drugega odvoda se izračuna še začetek (maksimum) in konec (minimum) svetlo-temne meje. Te tri črte narišemo na sliko in izračunamo širino svetlo-temne meje. To na koncu prikažemo na grafu. Program je napisan kot alternativa fotometru. To je stroj, ki s pomočjo fotocelice in mehanskega premikanja žarometa ugotavlja svetlo-temno mejo. Rezultati programa so primerljivi z njim. So pa dosti odvisni od kvalitete in osvetlitve slike. Program deluje hitro. Svetlo-temno mejo najde po celotni širini slike na intervalu kota 0,25° v dveh sekundah.
 % prazna stran
 \clearemptydoublepage
 
@@ -155,7 +168,7 @@ Cilj diplomske naloge je razviti program za preverjanje svetilnih lastnosti avto
 \addcontentsline{toc}{chapter}{Abstract}
 \chapter*{Abstract}
 
-The goal of this thesis is to develop a program for measuring lightness properties of car lights. Input parameter of this program is a image of a car light's beam. Beam is projected on a wall where guidelines are. Three horizontal and one vertical line. Program calculates from the image the cut-off line of the beam. This is a transition line from dark to light. User can select a vertical line on an image to see it's light intensities on a chart. User interface is composed of a set of plug-ins. They are read from a certain directory and loaded into a program dynamically. Each gets it's own tab. They use a Publisher-Subscriber model to communicate with each other. Through it images and other parameters are passed between steps in a program. Input image is first transformed into a black and white image. Then a Sobel's filter and Hough's line transformation are used to extract the guidelines. Guidelines are later used to help calculate real distances on the image in angles and centimetres from the central guideline. For each vertical on an image light intensities of pixels are calculated. Then the light cut-off point is calculated, which is equal to the inflection point on a curve of light intensities. This is where second derivative of this curve equals zero. Then the beginning and the end of the cut-off line are calculated (maximum and minimum of second derivative). At the end width of the cut-off line is calculated from this points and shown on a chart. Program was written as an alternative to a machine called Photometer which with a help of a light detector and mechanical movements of a car light calculates the cut-off line. Results of our program are on pair with a Photometer but they are dependant on a quality and lightness of an input image. Program works fast. It can find a cut-off line on an image (with an interval of 0,25°) in about two seconds.
+The goal of this thesis is to develop a program for measuring lightness properties of car lights. Input parameter of this program is an image of a car light's beam. Beam is projected on a wall where guidelines are. Three horizontal and one vertical line. Program calculates from the image the cut-off line of the beam. This is a transition line from dark to light. User can select a vertical line on an image to see it's light intensities on a chart. User interface is composed of a set of plug-ins. They are read from a certain directory and loaded into a program dynamically. Each gets it's own tab. They use a Publisher-Subscriber model to communicate with each other. Through it images and other parameters are passed between steps in a program. Input image is first transformed into a black and white image. Then a Sobel's filter and Hough's line transformation are used to extract the guidelines. Guidelines are later used to help calculate real distances on the image in angles and centimetres from the central guidelines. For each vertical on an image light intensities of pixels are calculated. Then the light cut-off point is calculated, which is equal to the inflection point on a curve of light intensities. This is where a second derivative of this curve equals zero. Then the beginning and the end of the cut-off line are calculated (maximum and minimum of the second derivative). At the end width of the cut-off line is calculated from this points and shown on a chart. Program was written as an alternative to a machine called Photometer which with a help of a light detector and mechanical movements of a car light calculates the cut-off line. Results of our program are on pair with a Photometer but they are dependant on a quality and lightness of an input image. Program works fast. It can find a cut-off line on an image (with an interval of 0,25°) in about two seconds.
 
 \selectlanguage{slovene}
 % prazna stran
@@ -171,35 +184,24 @@ Avtomobilska industrija je zelo zahtevno področje. Dosti konkurence. Dosti povp
 
 V tej diplomski nalogi se bomo osredotočili na avtomobilske žaromete. Ocenjevali bomo njihovo kakovost. Ne v smislu ta žaromet je zanič ali ta je dober. Ampak bomo gledali njihove lastnosti. Bolj specifično lastnosti njihovega snopa svetlobe.
 
-Zanimala nas bo svetlo-temna meja. Njen prehod, oblika in širina. Tehnologije za določanje teh karakteristik že obstajajo. Ena izmed takih je fotometer. Naprava ima veliko pomanjkljivosti. Je velika in mehanska. Zanjo potrebuješ posebej pripravljeno sobo, da zmanjšaš količino napake. Potrebuješ posebne stroje, ki žaromet premikajo. Na koncu pa lahko preverjaš samo en žaromet naenkrat. Poleg tega je vsak del naprave potrebno vzdrževati. Cena fotometra se giblje okoli 500.000 evrov. Ampak kljub temu je potrebna, saj se brez nje ne da doseči potrebne kvalitete.
+Zanimala nas bo svetlo-temna meja. Njen prehod, oblika in širina. Tehnologije za določanje teh karakteristik že obstajajo. Ena izmed takih je fotometer. Naprava ima veliko pomanjkljivosti. Je velika in mehanska. Zanjo potrebuješ posebej pripravljeno sobo, da zmanjšaš količino napake. Potrebuješ posebne stroje, ki žaromet premikajo. Na koncu pa lahko testiraš samo en žaromet naenkrat. Poleg tega je vsak del naprave potrebno vzdrževati. Cena fotometra se giblje okoli 500.000 evrov. Ampak kljub temu je potrebna, saj se brez nje ne da doseči potrebne kvalitete, ki jo zahtevajo stranke.
 
 Cilj te diplomske naloge je, da razvijemo alternativo te napravi. Ta alternativa bo v obliki računalniškega programa, ki bo obdeloval sliko snopa svetlobe žarometa. Soba bo seveda še vedno potrebna. Vendar jo bo potrebno manj zaščititi pred motnjami. Namesto fotometra potrebujemo samo fotoaparat ali kamero. Naš program mora tako omogočati vsaj isto funkcionalnost. Biti mora hitrejši in dati mora natančne rezultate.
 
-Diplomska naloga se začne s poglavjem, kjer opišem naš problem in cilje. Opiše se postopek pridobitve slike in prikazana je vhodna slika. Nato sledi pregled obstoječih rešitev. Sem spada opis fotometra in postopka, kako z njim izmerimo svetilne lastnosti žarometa. V naslednjem poglavju je opisan razvoj naše aplikacije. Najprej podam zahteve strojne opreme in opis programskih jezikov, ki so na voljo. Nato je opisan uporabniški vmesnik, ter celoten postopek obdelave slike, računanja svetlo-temne meje. Sledi opis postopka optimizacije. Podani so časi hitrosti algoritmov pred in po optimizaciji. V poglavju \ref{ch:primerjava} je narejena primerjava rezultatov našega programa in fotometra. Nato v poglavju \ref{ch:zakljucek} podamo zaključne ugotovitve.
-
 \chapter{Opis problema}
-Narediti moramo program, ki ugotavlja svetlobne lastnosti žarometov. Te lastnosti se potem upoštevajo pri oceni kakovosti žarometa in njegove izdelave. Žarometi so lahko sprednji, s kratkimi ali dolgimi lučmi, zadnji ali pa žarometi za meglenke. Snop iz žarometa usmerimo na steno, kjer so narisane vodilne črte. Te vsebujejo dve centralni črti (horizontalno in vertikalno) in več drugih pomožnih črtkanih črt. Centralni črti sta vsaki na kotih sijanja 0° in žaromet mora nanju sijati pravokotno. Pri sprednjih žarometih se tisto stran, ki sije višje, nastavi na prvo horizontalno črtkano črto. Pri meglenkah, kjer je cel snop v isti liniji, se žaromet nastavi na zadnjo horizontalno črtkano črto. S programom je potrebno najti prehod svetlo-temne meje v stopinjah in centimetrih, torej oddaljenost glede na horizontalno centralno črto. Izračunati moramo širino svetlo-temne meje. Sliki \ref{pic:vhp1} in \ref{pic:vhp2} sta primera vhodnih slik.
+Fotometer (slika \ref{pic:fotometer}) je naprava, ki jo v podjetju Hella Saturnus d.o.o. uporabljajo za določanje svetlobnih lastnosti žarometov \cite{hella-fotometer}. Žaromet se privije na optično os. Ta je nasproti fotocelici na razdalji petindvajsetih metrov. Za svetilke se uporablja razdalja treh metrov. Žarnice, ki se pri testih uporabljajo, so drugačne od tistih v proizvodnji žarometov. Nitka v žarnici mora biti določene dolžine in je ne sme presegati za več kot milimeter. Daljša nitka lahko namreč premakne svetlo-temno mejo. Pri merjenju fotocelica stoji na miru. Premika se samo žaromet in sicer v vertikalni smeri. Na vsake 0,01° se pomeri svetilnost. Tako se ugotovi svetlo-temno mejo. Nahaja se tam, kjer je največja razlika (gradient) svetlobe med dvema točkama. Na razdalji 0,01° svetloba naraste za 20\%, pri ksenon žarnicah tudi do 200\%. Nato se preveri bleščanje žarometa, kjer se žaromet obrne tako, da ne sveti v zaslon. Preveri pa se moč svetlobe (pod različnimi koti), ki pada na fotocelico. Standardi svetilnosti žarometov so od države do države različni. 
 
-\begin{figure}
-\begin{center}
-\includegraphics[width=10cm]{slike/original.jpg}
-\end{center}
-\caption{Vhodna slika, sprednji žaromet.}
-\label{pic:vhp1}
-\end{figure}
+\slika{slike/Photometer.jpg}{Slika fotometra.}{pic:fotometer}
+Slika \ref{pic:fotometer} prikazuje fotometer v delovanju. Na sredini je optična os z žarometom. Žaromet sveti na zaslon, kjer so narisane vodilne črte. V odprtini na zaslonu je fotocelica, katera izvaja meritve.
 
-\begin{figure}
-\begin{center}
-\includegraphics[width=10cm]{slike/levi3.JPG}
-\end{center}
-\caption{Vhodna slika, meglenka.}
-\label{pic:vhp2}
-\end{figure}
+V naslednjem poglavju je opisan razvoj naše aplikacije. Najprej podam zahteve strojne opreme in opis programskih jezikov, ki so na voljo. Nato je opisan uporabniški vmesnik, ter celoten postopek obdelave slike, računanja svetlo-temne meje. Sledi opis postopka optimizacije. Podani so časi hitrosti algoritmov pred in po optimizaciji. V poglavju \ref{ch:primerjava} je narejena primerjava rezultatov našega programa in fotometra. Nato v poglavju \ref{ch:zakljucek} podamo zaključne ugotovitve.
 
+Moramo torej narediti program, ki ugotavlja svetlobne lastnosti žarometov. Te lastnosti se potem upoštevajo pri oceni kakovosti žarometa in njegove izdelave. Žarometi so lahko sprednji, s kratkimi ali dolgimi lučmi, zadnji ali pa žarometi za meglenke. Snop iz žarometa usmerimo na zaslon, kjer so narisane vodilne črte. Te vsebujejo dve centralni črti (horizontalno in vertikalno) in več drugih pomožnih črtkanih črt. Centralni črti sta vsaki na kotih sijanja 0° in žaromet mora nanju sijati pravokotno. Pri sprednjih žarometih se tisto stran, ki sije višje, nastavi na prvo horizontalno črtkano črto. Pri meglenkah, kjer je cel snop v isti liniji, se žaromet nastavi na zadnjo horizontalno črtkano črto. S programom je potrebno najti prehod svetlo-temne meje v stopinjah in centimetrih, torej oddaljenost glede na horizontalno centralno črto. Izračunati moramo širino svetlo-temne meje. Sliki \ref{pic:vhp1} in \ref{pic:vhp2} sta primera vhodnih slik.
 
-\chapter{Sorodne rešitve}
-\section{Delovanje fotometra}
-Fotometer je naprava, ki jo v podjetju Hella Saturnus d.o.o. uporabljajo za določanje svetlobnih lastnosti žarometov. Žaromet se privije na optično os. Ta je nasproti fotocelici na razdalji petindvajsetih metrov. Za svetilke se uporablja razdalja treh metrov. Žarnice, ki se pri testih uporabljajo, so drugačne od tistih v proizvodnji žarometov. Nitka v žarnici mora biti določene dolžine in je ne sme presegati za več kot milimeter. Daljša nitka lahko namreč premakne svetlo-temno mejo. Pri merjenju fotocelica stoji na miru. Premika se samo žaromet in sicer v vertikalni smeri. Na vsake 0,01° se pomeri svetilnost. Tako se ugotovi svetlo-temno mejo. Nahaja se tam, kjer je največja razlika (gradient) svetlobe med dvema točkama. Na razdalji 0,01° svetloba naraste za 20\%, pri ksenon žarnicah tudi do 200\%. Nato se preveri bleščanje žarometa, kjer se žaromet obrne tako, da ne sveti v zaslon. Preveri pa se moč svetlobe (pod različnimi koti), ki pada na fotocelico. Standardi svetilnosti žarometov so od države do države različni. 
+\pagebreak
+\slika{slike/original.jpg}{Vhodna slika, sprednji žaromet.}{pic:vhp1}
+\slika{slike/levi3.JPG}{Vhodna slika, meglenka.}{pic:vhp2}
+
 
 \chapter{Razvoj lastne aplikacije}
 \section{Določitev strojne opreme}
@@ -270,7 +272,7 @@ Ena izmed zahtev naročnika programa je bila, da teče na operacijskem sistemu W
 \subsection{PHP}
 \paragraph{Plusi}
 \begin{itemize}
-\item HTML vmesnik, ki zgleda isto v večini operacijskih sistemov.
+\item HTML vmesnik, ki zgleda enako v večini operacijskih sistemov.
 \end{itemize}
 \paragraph{Minusi}
 \begin{itemize}
@@ -285,13 +287,7 @@ Moja končna izbira je bil C\#. Veliko tudi zaradi osebnih preferenc. V njem sem
 \section{Zasnova uporabniškega vmesnika}
 Uporabniški vmesnik je razdeljen v osem glavnih sklopov. Ta so: originalna slika, črno-bela slika, Sobelov filter, prag, vodilne črte, vertikalne jakosti, svetlo-temna meja in širina svetlo-temne meje. Vsaka izmed teh je dosegljiva preko zavihkov (slika \ref{pic:vmesnik1}).
 
-\begin{figure}
-\begin{center}
-\includegraphics[width=10cm]{slike/vmesnik-glavni.jpg}
-\end{center}
-\caption{Uporabniški vmesnik razvitega programa.}
-\label{pic:vmesnik1}
-\end{figure}
+\slika{slike/vmesnik-glavni.jpg}{Uporabniški vmesnik razvitega programa.}{pic:vmesnik1}
 
 \subsection{Vtičniki}
 Vmesnik je zasnovan na principu vtičnikov \cite{oreilly-dp, oreilly-cs}. Vsak zavihek je svoj vtičnik in vsak ima svoj uporabniški vmesnik za konfiguracijo nastavitev. Definirani so s pomočjo programskega vmesnika, ki zgleda tako:
@@ -307,20 +303,11 @@ interface IImagePlugin {
 \end{verbatim}
 \end{samepage}
 Lastnost UserInterface vrne uporabniški vmesnik vtičnika. Ta je lahko standarden s sliko na levi strani in konfiguracijskimi polji in gumbi na desni strani (slika \ref{pic:vmesnik2}). Lahko pa vsebuje samo graf (slika \ref{pic:vmesnik3}).
-\begin{figure}
-\begin{center}
-\includegraphics[width=10cm]{slike/vmesnik-slika-konfiguracija.jpg}
-\end{center}
-\caption{Primer uporabniškega vmesnika za iskanje vodilnih črt.}
-\label{pic:vmesnik2}
-\end{figure}
-\begin{figure}
-\begin{center}
-\includegraphics[width=10cm]{slike/vmesnik-samo-graf.jpg}
-\end{center}
-\caption{Primer uporabniškega vmesnika z grafom.}
-\label{pic:vmesnik3}
-\end{figure}
+
+\slika{slike/vmesnik-slika-konfiguracija.jpg}{Primer uporabniškega vmesnika za iskanje vodilnih črt.}{pic:vmesnik2}
+
+\slika{slike/vmesnik-samo-graf.jpg}{Primer uporabniškega vmesnika z grafom.}{pic:vmesnik3}
+
 Metoda ValidateInput se kliče, ko uporabnik pritisne gumb Refresh. Ta metoda preveri vse vrednosti v poljih vmesnika, če imajo pravilno vsebino (če je podana širina število, da ni preveliko ali premajhno ipd.). Metoda ProcessImage se kliče po metodi ValidateInput. Namenjena je procesiranju in obdelavi slike. Pri vtičniku črno-bela slika ta metoda tako spremeni originalno sliko v črno-belo. V vtičniku vodilne črte pa ta metoda najde vertikalno in dve horizontalni vodilni črti na sliki. Lastnost Name je ime vtičnika, ki je prikazana v imenu zavihka.
 
 \subsection{Nalaganje vtičnikov}
@@ -375,13 +362,7 @@ Rezultat tega koraka je slika \ref{pic:bw}.
 
 
 
-\begin{figure}
-\begin{center}
-\includegraphics[width=10cm]{slike/crno-bela-slika.jpg}
-\end{center}
-\caption{Rezultat pretvorbe vhodne barvne slike v črno-belo sliko.}
-\label{pic:bw}
-\end{figure}
+\slika{slike/crno-bela-slika.jpg}{Rezultat pretvorbe vhodne barvne slike v črno-belo sliko.}{pic:bw}
 
 \subsection{Sobelov filter}
 \label{ch:sobel}
@@ -393,16 +374,10 @@ sobel = new SobelEdgeDetector().Apply(crnobelaslika);
 \end{samepage}
 Rezultat filtra je slika \ref{pic:sobel}.
 
-\begin{figure}
-\begin{center}
-\includegraphics[width=10cm]{slike/sobel.jpg}
-\end{center}
-\caption{Rezultat Sobelovega filtera.}
-\label{pic:sobel}
-\end{figure}
+\slika{slike/sobel.jpg}{Rezultat Sobelovega filtera.}{pic:sobel}
 
 \subsection{Prag}
-S tretjim korakom izločimo šum z algoritmom za določanje pragu \cite{treshold-wiki}. To storimo tako, da za vsako točko pogledamo njeno intenziteto\footnote{Pri pretvorbi v črno belo sliko imajo sedaj vse tri komponente točke isto vrednost.}. Intenziteta je enaka vrednosti ene izmed RGB komponent. Če je intenziteta večja od vrednosti, ki si jo uporabnik izbere\footnote{Intenzitete imajo lahko vrednost od 0 do 255.}, potem na novo sliko vpišemo točko z maksimalno intenziteto. Če je ta vrednost manjša od izbrane, vpišemo točko z minimalno intenziteto\footnote{Bela točka ima intenziteto 255, črna pa intenziteto 0.}. Tako na novi sliki še bolj poudarimo vodilne črte in zmanjšamo količino šuma (torej točke, ki niso vodilne črte in bi ovirale njihovo detekcijo). Ta algoritem v psevdokodi zgleda tako:
+S tretjim korakom izločimo šum z algoritmom za določanje pragu \cite{treshold-wiki}. To storimo tako, da za vsako točko pogledamo njeno intenziteto (po pretvorbi v črno-belo sliko imajo vse tri komponente točke isto vrednost). Intenziteta je enaka vrednosti ene izmed RGB komponent. Če je intenziteta večja od vrednosti, ki si jo uporabnik izbere (intenzitete imajo lahko vrednost od 0 do 255), potem na novo sliko vpišemo točko z maksimalno intenziteto. Če je ta vrednost manjša od izbrane, vpišemo točko z minimalno intenziteto (bela točka ima intenziteto 255, črna pa intenziteto 0). Tako na novi sliki še bolj poudarimo vodilne črte in zmanjšamo količino šuma (torej točke, ki niso del vodilnih črt in bi ovirale njihovo detekcijo). Ta algoritem v psevdokodi zgleda tako:
 \begin{samepage}
 \begin{verbatim}
 for (int i = 0; i < visina(slika); i++)
@@ -415,17 +390,11 @@ for (int i = 0; i < visina(slika); i++)
 \end{samepage}
 Algoritem kot vhodni parameter sprejme sliko in vrednost pragu. Kot rezultat pa vrne sliko \ref{pic:treshold}.
 
-\begin{figure}
-\begin{center}
-\includegraphics[width=10cm]{slike/treshold.jpg}
-\end{center}
-\caption{Rezultat pragovnega filtra.}
-\label{pic:treshold}
-\end{figure}
+\slika{slike/treshold.jpg}{Rezultat pragovnega filtra.}{pic:treshold}
 
 
 \subsection{Iskanje vodilnih črt}
-V tem koraku iščemo prvi dve horizontalni vodilni črti (od zgoraj navzdol), ter sredinsko vertikalno vodilno črto. Uporabljena je Houghjevo črtno transformacijo \cite{hough-wiki}, s katero najdemo črte na sliki. Tudi ta je že implementirana v Aforge.NET knjižnici \cite{hough}. Primer klica za Hough-jevo transformacijo:
+V tem koraku iščemo prvi dve horizontalni vodilni črti (od zgoraj navzdol), ter sredinsko vertikalno vodilno črto. Uporabimo Houghjevo črtno transformacijo \cite{hough-wiki}, s katero najdemo črte na sliki. Tudi ta je že implementirana v Aforge.NET knjižnici \cite{hough}. Primer klica za Hough-jevo transformacijo:
 \begin{samepage}
 \begin{verbatim}
 HoughLineTransformation hlt = new HoughLineTransformation();
@@ -435,32 +404,28 @@ IEnumerable<HoughLine> verticalLines =
 lines.Where(l => -5 <= l.Theta && l.Theta <= 5);
 \end{verbatim}
 \end{samepage}
-Algoritem sprejme sliko pragu Sobelovega filtra. Vrne nam seznam črt, ki imajo večjo relativno jakost od parametra relativeIntensity in kot med -5° in 5°\footnote{S tem kotnim pogojem najdemo vertikalne črte, za horizontalne črte pa uporabimo kote od 85° do 95°.}. Relativna jakost črte je odvisna od števila belih pik, ki ležijo na črti. Vsaka črta je predstavljena z oddaljenostjo od centralne točke na sliki in kotom naklona. Tako je črta na oddaljenosti 0 in kotom 90° zelo blizu naše iskane prve horizontalne črte. Črta z oddaljenostjo 0 in kotom 0° pa blizu naše iskane vertikalne vodilne črte. \cite{hough} 
+Algoritem sprejme sliko pragu Sobelovega filtra. Vrne nam seznam črt, ki imajo večjo relativno jakost od parametra relativeIntensity in kot med -5° in 5° (s tem kotnim pogojem najdemo vertikalne črte, za horizontalne črte pa uporabimo kote od 85° do 95°). Relativna jakost črte je odvisna od števila belih pik, ki ležijo na črti. Vsaka črta je predstavljena z oddaljenostjo od centralne točke na sliki in kotom naklona. Tako je črta na oddaljenosti 0 in kotom 90° zelo blizu naše iskane prve horizontalne črte. Črta z oddaljenostjo 0 in kotom 0° pa blizu naše iskane vertikalne vodilne črte. \cite{hough} 
 
-\begin{figure}
-\begin{center}
-\includegraphics[width=10cm]{slike/vodilne-crte.jpg}
-\end{center}
-\caption{Vodilne črte.}
-\label{pic:vodilne-crte}
-\end{figure}
+\slika{slike/vodilne-crte.jpg}{Vodilne črte.}{pic:vodilne-crte}
 
 Te črte (slika \ref{pic:vodilne-crte}) se nato uporabijo za določitev mer na sliki (v kotih in centimetrih). Uporabnik vnese razdaljo med horizontalnima črtama v cm in razdaljo od zaslona do kamere v cm. Iz tega lahko izračunamo, koliko točk na sliki je en centimeter. Formula za izračun:
 \begin{equation}
 v=\dfrac{a}{|r_1-r_2|},
 \end{equation}
-kjer $v$ predstavlja velikost točke v cm, spremenljivka $a$ je razdalja med horizontalnima vodilnima črtama v cm, razlika med $r_1$ in $r_2$ pa je enaka razdalji med horizontalnima vodilnima črtama na sliki v točkah. 
+kjer $v$ predstavlja velikost točke v cm, spremenljivka $a$ je razdalja med horizontalnima vodilnima črtama v cm, razlika med $r_1$ in $r_2$ pa je enaka razdalji med horizontalnima vodilnima črtama na sliki v točkah (rdeči črti na sliki \ref{pic:vodilne-mere}). 
 
 Za vsako točko na sliki lahko izračunamo kot glede na centralno vertikalno ali horizontalno vodilno črto. Formula za izračun kota:
 \begin{equation}
 tan(\alpha)=\dfrac{a}{b},
 \end{equation}
-kjer je $a$ oddaljenost v cm trenutne točke od centralne vodilne črte, $b$ je oddaljenost zaslona od kamere v cm, $\alpha$ je kot, ki ga iščemo.
+kjer je $a$ oddaljenost v cm trenutne točke od centralne vodilne črte, $b$ je oddaljenost zaslona od kamere v cm, $\alpha$ je kot, ki ga iščemo. Na sliki \ref{pic:vodilne-mere} je prikazan primer oddaljenosti 1° od centralne vertikalne črte (razdalja med zeleno in modro vertikalno črto).
+
+\slika{slike/vodilne-mere.jpg}{Črte za umeritev slike (zelena in rdeči črti) in oddaljenost za 1° od centralne vertikalne vodilne črte (modra črta).}{pic:vodilne-mere}
 
 \subsection{Pregled intenzitet po vertikali}
 Ta korak je glavni za določitev svetlo-temne meje. To storimo tako, da izberemo vertikalo na sliki in pogledamo intenzitete njenih točk. Za sliko uporabimo črno-belo sliko iz prvega koraka. Intenzitete nato izrišemo na grafu (sliki \ref{pic:intenzitete1} in \ref{pic:intenzitete2}).
 
-Os $x$ na sliki \ref{pic:intenzitete1} predstavlja oddaljenost v stopinjah na sliki \ref{pic:intenzitete2} pa v cm, od horizontalne vodilne črte. Na $y$ osi je prikazana intenziteta točke. Primer algoritma v psevdokodi zgleda tako:
+Os $x$ na sliki \ref{pic:intenzitete1} predstavlja oddaljenost v stopinjah, na sliki \ref{pic:intenzitete2} pa v cm, od horizontalne vodilne črte. Na $y$ osi je prikazana intenziteta točke. Primer algoritma v psevdokodi zgleda tako:
 \begin{samepage}
 \begin{verbatim}
 for (int i = 0; i < visina(slika); i++)
@@ -471,21 +436,9 @@ for (int i = 0; i < visina(slika); i++)
 Algoritem sprejme kot vhodni parameter sliko svetlo-temne meje, prebere iz trenutne vrstice z indeksom i vrednost (intenziteto) iz stolpca x (naša vertikala), nato pretvori koordinate vrstice i v izbrano enoto (stopinje ali centimetri), na koncu pa shrani intenziteto in koordinate vrstice v seznam parov XY.
 
 
-\begin{figure}
-\begin{center}
-\includegraphics[width=10cm]{slike/intenzitete.jpg}
-\end{center}
-\caption{Intenzitete izbrane vertikale v stopinjah.}
-\label{pic:intenzitete1}
-\end{figure}
+\slika{slike/intenzitete.jpg}{Intenzitete izbrane vertikale v stopinjah.}{pic:intenzitete1}
 
-\begin{figure}
-\begin{center}
-\includegraphics[width=10cm]{slike/intenzitete-v-cm.jpg}
-\end{center}
-\caption{Intenzitete izbrane vertikale v centimetrih.}
-\label{pic:intenzitete2}
-\end{figure}
+\slika{slike/intenzitete-v-cm.jpg}{Intenzitete izbrane vertikale v centimetrih.}{pic:intenzitete2}
 
 \subsection{Iskanje svetlo-temne meje}
 \begin{samepage}
@@ -502,16 +455,11 @@ For (i = 1; i < dolzina(f) - 1; i++)
 \end{samepage}
 
 Slika \ref{pic:d2} prikazuje rezultat algoritma. Iz nje težko določimo, katera ničla na grafu je prava. Originalna funkcija vsebuje veliko šuma. Dosti spreminja smer in tako vsebuje veliko prevojnih točk. Ta problem rešimo tako, da našo originalno funkcijo (sliki \ref{pic:intenzitete1} in \ref{pic:intenzitete2}) zgladimo z algoritmom za glajenje funkcij.
-\begin{figure}
-\begin{center}
-\includegraphics[width=10cm]{slike/drugi-odvod-1.jpg}
-\end{center}
-\caption{Drugi odvod funkcije intenzitet po vertikali.}
-\label{pic:d2}
-\end{figure}
+
+\slika{slike/drugi-odvod-1.jpg}{Drugi odvod funkcije intenzitet po vertikali.}{pic:d2}
 
 \subsection{Glajenje funkcije}
-V našem programu funkcijo gladimo tako, da jo povprečimo. Velikost okna\footnote{Okno je število elementov, ki jih vzamemo v povprečje, ko računamo trenutni element.} je nastavljiva s strani uporabnika. Obstaja več načinov kako povprečiti funkcijo. V povprečju lahko upoštevamo tudi samo elemente pred trenutnim, lahko samo elemente za trenutnim elementom. Najbolje se obnese, če vzamemo polovico velikosti okna elementov pred trenutnim in polovico elementov za trenutnim. Torej, če je naše okno veliko enajst, začnemo s šestim elementom, k njemu prištejemo pet elementov pred njim in pet za njim. Število, ki ga dobimo, delimo s enajst in to je naš rezultat za trenutni element. Nadaljujemo dokler nam elementov (točk) v naši originalni funkciji ne zmanjka:
+V našem programu funkcijo gladimo tako, da jo povprečimo. Velikost okna (število elementov, ki jih vzamemo v povprečje, ko računamo trenutni element) je nastavljiva s strani uporabnika. Obstaja več načinov kako povprečiti funkcijo. V povprečju lahko upoštevamo samo elemente pred trenutnim, lahko samo elemente za trenutnim elementom. Najbolje se obnese, če vzamemo polovico velikosti okna elementov pred trenutnim in polovico elementov za trenutnim. Torej, če je naše okno veliko enajst elementov, začnemo s šestim elementom, k njemu prištejemo pet elementov pred njim in pet za njim. Število, ki ga dobimo, delimo z enajst in to je naš rezultat za trenutni element. Nadaljujemo dokler nam elementov v naši originalni funkciji ne zmanjka:
 \begin{samepage}
 \begin{verbatim}
 a = dolzina(f) / 2
@@ -525,31 +473,13 @@ for (i = a; i < dolzina(f) < a; i++)
 Spremenljivka r je rezultat in zglajena funkcija našega algoritma (slika \ref{pic:smooth1} in slika \ref{pic:smooth2}).
 Slika \ref{pic:smooth1} prikazuje našo zglajeno funkcijo. Slika \ref{pic:smooth2} pa prikazuje primerjavo med originalno in zglajeno funkcijo.
 
-\begin{figure}
-\begin{center}
-\includegraphics[width=10cm]{slike/glajena-funkcija.jpg}
-\end{center}
-\caption{Zglajena funkcija intenzitet po vertikali.}
-\label{pic:smooth1}
-\end{figure}
+\slika{slike/glajena-funkcija.jpg}{Zglajena funkcija intenzitet po vertikali.}{pic:smooth1}
 
-\begin{figure}
-\begin{center}
-\includegraphics[width=10cm]{slike/glajena-+-original.jpg}
-\end{center}
-\caption{Primerjava zglajene in originalne funkcije.}
-\label{pic:smooth2}
-\end{figure}
+\slika{slike/glajena-+-original.jpg}{Primerjava zglajene in originalne funkcije.}{pic:smooth2}
 
 Če sedaj to zglajeno funkcijo (slika \ref{pic:smooth1}) odvajamo, dobimo lepšo funkcijo drugega odvoda (slika \ref{pic:d22}), kjer lahko določimo točko svetlo-temne meje.
 
-\begin{figure}
-\begin{center}
-\includegraphics[width=10cm]{slike/drugi-odvod-2.jpg}
-\end{center}
-\caption{Drugi odvod zglajene funkcije.}
-\label{pic:d22}
-\end{figure}
+\slika{slike/drugi-odvod-2.jpg}{Drugi odvod zglajene funkcije.}{pic:d22}
 
 \subsection{Določanje svetlo-temne meje}
 
@@ -571,24 +501,12 @@ z &= (-n/k) \nonumber
 \end{align} 
 $z$ predstavlja $x$ koordinato, kjer se nahaja ničla na naši funkciji drugega odvoda in posledično točka svetlo-temne meje na naši originalni funkciji. To točko nato izrišemo na grafu (slika \ref{pic:svet-tem}) in na naši originalni sliki (\ref{pic:svet-tem2}).
 
-\begin{figure}
-\begin{center}
-\includegraphics[width=10cm]{slike/svetlo-temna-meja.jpg}
-\end{center}
-\caption{Začetna (Top), končna točka (Bottom) in točka svetlo-temne meje na grafu (Middle).}
-\label{pic:svet-tem}
-\end{figure}
+\slika{slike/svetlo-temna-meja.jpg}{Začetna (Top), končna točka (Bottom) in točka svetlo-temne meje na grafu (Middle).}{pic:svet-tem}
 
 Na sliki \ref{pic:svet-tem} je točka Middle izračunana svetlo-temna meja. Točki Top and Bottom sta maksimum in minimum funkcije drugega odvoda. 
 
 
-\begin{figure}
-\begin{center}
-\includegraphics[width=10cm]{slike/svetlo-temna-meja-orig-crop.jpg}
-\end{center}
-\caption{Začetna točka (zelena), končna točka (modra) in točka svetlo temne meje na sliki (rumena).}
-\label{pic:svet-tem2}
-\end{figure}
+\slika{slike/svetlo-temna-meja-orig-crop.jpg}{Začetna točka (zelena), končna točka (modra) in točka svetlo-temne meje na sliki (rumena).}{pic:svet-tem2}
 
 Rumena točka na sliki \ref{pic:svet-tem2} predstavlja svetlo-temno mejo, zelena začetek oziroma masksimum drugega odvoda funkcije, modra pa konec svetlo-temne meje oziroma minimum drugega odvoda funkcije. Rdeča črta prikazuje trenutno izbrano vertikalo. Modri črti sta pa vodilni črti, izračunani z našim programom. Vsaka je postavljena na kotu petih stopinj glede na centralno vertikalno vodilno črto. To območje je enako območju osvetljenosti vozišča, ki ga vidi voznik avtomobila.
 
@@ -606,83 +524,47 @@ Parallel.ForEach<int>(sirinaSlike, x => {
 \end{samepage}
 Algoritem nam najde vse točke po celotni širini slike za svetlo temno mejo. Vsa jedra procesorja so obremenjena. Več jeder imamo, hitreje deluje algoritem.
 
-Alternativna implementacija je lahko vnaprej kreiranimi nitmi in delavnimi (angl. worker) razredi. Razredu se poda kot parameter sliko in koordinato vertikale. Na koncu pa preko založnik-naročnik objekta sporoči rezultate. Lahko se uporabi distribuirano procesiranje na več računalnikih, kjer se izvajajo delavni procesi. Ti procesi sprejmejo iste parametre kot predhodni primer. Razlika je le v tem, da se parametri pošljejo preko vtičnic (angl. sockets) po lokalni mreži ali preko interneta. To implementacijo bi se dalo izvesti s prosto rešitvijo BeanstalkD \cite{beanstalkd}, ki omogoča preprosto implementacijo vodje in delavnih procesov.
+Alternativna implementacija je lahko z vnaprej kreiranimi nitmi in delavnimi (angl. worker) razredi. Razredu se poda kot parameter sliko in koordinato vertikale. Na koncu pa preko založnik-naročnik objekta sporoči rezultate. Lahko se uporabi distribuirano procesiranje na več računalnikih, kjer se izvajajo delavni procesi. Ti procesi sprejmejo iste parametre kot predhodni primer. Razlika je le v tem, da se parametri pošljejo preko vtičnic (angl. sockets) po lokalni mreži ali preko interneta. To implementacijo bi se dalo izvesti s prosto rešitvijo BeanstalkD \cite{beanstalkd}, ki omogoča preprosto implementacijo vodje in delavnih procesov.
 
 Na koncu nam preostane samo še, da te črte (algoritem vrne svetlo-temno mejo, njen začetek in konec) izrišemo na sliki (\ref{pic:svet-tem3}). 
 
 
 
-\begin{figure}
-\begin{center}
-\includegraphics[width=10cm]{slike/svetlo-temna-meja-po-celi-sirini.jpg}
-\end{center}
-\caption{Črte začetka, konca in prehoda svetlo-temne meje.}
-\label{pic:svet-tem3}
-\end{figure}
+\slika{slike/svetlo-temna-meja-po-celi-sirini.jpg}{Črte začetka, konca in prehoda svetlo-temne meje.}{pic:svet-tem3}
 
 \subsection{Graf širine svetlo-temne meje}
 Za vsako izračunano vertikalo sedaj odštejemo višino črte začetka svetlo-temne meje na sliki in višino črte konca svetlo-temne meje na sliki. Te vrednosti nato prikažemo na grafu, glede na izbrano enoto (lahko v centimetrih ali kotih v stopinjah).
 
-\begin{figure}
-\begin{center}
-\includegraphics[width=10cm]{slike/graf-sirina-s-t-meja-crop.jpg}
-\end{center}
-\caption{Graf širine svetlo-temne meje.}
-\label{pic:st-sirina}
-\end{figure}
+\slika{slike/graf-sirina-s-t-meja-crop.jpg}{Graf širine svetlo-temne meje.}{pic:st-sirina}
 
 
-Na sliki \ref{pic:st-sirina} je na $x$ osi prikazana razdalja v centimetrih od vertikalne vodilne črte, na $y$ osi pa širina svetlo-temne meje, tudi v centimetrih. V tem primeru širina sega od devet do dvanajst centimetrov.
+Na sliki \ref{pic:st-sirina} je na $x$ osi prikazana razdalja v centimetrih od vertikalne vodilne črte, na $y$ osi pa širina svetlo-temne meje, tudi v centimetrih. V tem primeru širina sega od devet do dvanajst centimetrov. Meje te širine so določene s strani stranke in jih žarometi ne smejo presegati. Ta test nam tako pove, če žaromet zadostuje zahtevam ali je potrebno spremeniti njegove karakteristike.
 
 
 \section{Optimizacija}
-Optimizacija je potekala na algoritmu za izračun in izris svetlo-temne meje na celotni širini slike (3648 točk). Upoštevane so samo vertikale na intervalu kota 0,25°. Oddaljenost kamere od zaslona je 920 cm. Računalnik na katerem so testi potekali, ima 4-jedrni procesor. Izmerjen čas prvotnih algoritmov se je gibal okoli 50 sekund.
+Optimizacija je potekala na algoritmu za izračun in izris svetlo-temne meje na celotni širini slike (3648 točk, celotna slika jih vsebuje 10 milijonov). Upoštevane so samo vertikale na intervalu kota 0,25°. Oddaljenost kamere od zaslona je 920 cm. Računalnik na katerem so testi potekali, ima 4-jedrni procesor. Izmerjen čas prvotnih algoritmov se je gibal okoli 50 sekund.
 
 \subsection{Slikovni filtri}
-Prve verzije teh algoritmov so uporabljale Microsoftov .NET razred System.\-Drawing.\-Bitmap za branje in pisanje točk s/na slike. Ta razred vsebuje dve metodi, prva je GetPixel(x,y), ki vrne barvo točke, druga je SetPixel(x,y,color), ki nastavi barvo točki. Namesto tega sem uporabil direkten dostop do slike, kjer so točke shranjene v zaporedjih štirih komponent R, G, B in A\footnote{Komponenta A določa transparentnost.}. Takšen direkten dostop do katerekoli točke na sliki je skrajšal čas algoritma za več kot polovico, na 20 sekund (slika \ref{pic:opt-sf}).
+Prve verzije teh algoritmov so uporabljale Microsoftov .NET razred System.\-Drawing.\-Bitmap za branje in pisanje točk s/na sliko. Ta razred vsebuje dve metodi, prva je GetPixel(x,y), ki vrne barvo točke, druga je SetPixel(x,y,color), ki nastavi barvo točki. Namesto tega sem uporabil direkten dostop do slike, kjer so točke shranjene v zaporedjih štirih komponent R, G, B in A (komponenta A določa transparentnost). Takšen direkten dostop do katerekoli točke na sliki je skrajšal čas algoritma za več kot polovico, na 20 sekund (slika \ref{pic:opt-sf}).
 
 
 
-\begin{figure}
-\begin{center}
-\includegraphics[width=10cm]{slike/optimizacija_grafi/optimizacija-slikovnih-filtrov.jpg}
-\end{center}
-\caption{Pospešitev algoritmov za slikovne filtre.}
-\label{pic:opt-sf}
-\end{figure}
+\slika{slike/optimizacija_grafi/optimizacija-slikovnih-filtrov.jpg}{Pospešitev algoritmov za slikovne filtre.}{pic:opt-sf}
 
 
 \subsection{Paralelno procesiranje}
-Kot sem že omenil v poglavju \ref{ch:iskanj-sv-t-m}, sem pri iskanju svetlo-temne meje na vertikalah uporabil paralelno for zanko. Algoritem brez paralelnega procesiranja z izboljšanim branjem in pisanjem slike je potreboval 20 sekund\footnote{Poleg tega pa knjižnica .NET ne omogoča pisanja v sliko iz več niti naenkrat, tako da paralelno procesiranje z njo ni bilo mogoče.}. S 4-jedrnim procesorjem in paralelnim izvajanjem se je ta čas zmanjšal na 5 sekund (slika \ref{pic:opt-p}). Tukaj se vidi, da je tak način zelo primeren za naš problem. Prav tako hitrost algoritma seveda narašča s hitrostjo računalnika.
+Kot sem že omenil v poglavju \ref{ch:iskanj-sv-t-m}, sem pri iskanju svetlo-temne meje na vertikalah uporabil paralelno for zanko. Algoritem brez paralelnega procesiranja z izboljšanim branjem in pisanjem slike je potreboval 20 sekund (poleg tega pa knjižnica .NET ne omogoča pisanja v sliko iz več niti naenkrat, tako da paralelno procesiranje z njo ni bilo mogoče). S 4-jedrnim procesorjem in paralelnim izvajanjem se je ta čas zmanjšal na 5 sekund (slika \ref{pic:opt-p}). Tukaj se vidi, da je tak način zelo primeren za naš problem. Prav tako hitrost algoritma seveda narašča s hitrostjo računalnika.
 
 
-\begin{figure}
-\begin{center}
-\includegraphics[width=10cm]{slike/optimizacija_grafi/optimizacija-s-paralelnim-procesiranjem.jpg}
-\end{center}
-\caption{Pospešitev algoritmov s paralelnim procesiranjem.}
-\label{pic:opt-p}
-\end{figure}
+\slika{slike/optimizacija_grafi/optimizacija-s-paralelnim-procesiranjem.jpg}{Pospešitev algoritmov s paralelnim procesiranjem.}{pic:opt-p}
 
 \subsection{Algoritem za glajenje funkcij}
-Po podrobni analizi kode sem ugotovil, da glavni algoritem največ časa porabi pri glajenju funkcije. Začetni algoritem je za vsak element sešteval polovico velikosti okna elementov pred njim in za njim. Ta algoritem sem nato spremenil, da hrani vsoto okna skozi celotno vertikalo. Vsak nov element, ki pride v okno, se prišteje k vsoti. Odšteje se element, ki zapusti okno. Tako je časovna zahtevnost algoritma padla iz O(velikost okna $\times$ n) na O(n)\footnote{$n$ je število elementov v naši funkciji.}, hitrost algoritma pa na 2 sekundi (slika \ref{pic:opt-g}).
+Po podrobni analizi kode sem ugotovil, da glavni algoritem največ časa porabi pri glajenju funkcije. Začetni algoritem je za vsak element sešteval polovico velikosti okna elementov pred njim in za njim. Ta algoritem sem nato spremenil, da hrani vsoto okna skozi celotno vertikalo. Vsak nov element, ki pride v okno, se prišteje k vsoti. Odšteje se element, ki zapusti okno. Tako je časovna zahtevnost algoritma padla iz O(velikost okna $\times$ n) na O(n) ($n$ je število elementov v naši funkciji), hitrost algoritma pa na 2 sekundi (slika \ref{pic:opt-g}).
 
 
-\begin{figure}
-\begin{center}
-\includegraphics[width=10cm]{slike/optimizacija_grafi/optimizacija-algoritma-za-glajenje-funkcij.jpg}
-\end{center}
-\caption{Pospešitev algoritma za glajenje funkcije.}
-\label{pic:opt-g}
-\end{figure}
+\slika{slike/optimizacija_grafi/optimizacija-algoritma-za-glajenje-funkcij.jpg}{Pospešitev algoritma za glajenje funkcije.}{pic:opt-g}
 
-\begin{figure}
-\begin{center}
-\includegraphics[width=10cm]{slike/optimizacija_grafi/celotna-pospesitev.jpg}
-\end{center}
-\caption{Pospešitev algoritmov po optimizaciji.}
-\label{pic:opt-c}
-\end{figure}
+\slika{slike/optimizacija_grafi/celotna-pospesitev.jpg}{Pospešitev algoritmov po optimizaciji.}{pic:opt-c}
 
 Na sliki \ref{pic:opt-c} je prikazana celotna pospešitev algoritmov po optimizaciji. Hitrost izvajanja se je znižal iz 50 sekund na 2 sekundi.
 
@@ -701,11 +583,13 @@ Test je bil opravljen na levem in desnem žarometu za meglenke. Na pozicijah 0°
 +2°  & -1,26° & -1,24°   \\ 
 \end{tabular}
 \end{center}
+\vspace{-20pt}
 \caption{Primerjava rezultatov fotometra in prenosnega merilnika za levi žaromet.}
+
 \label{tbl:primerjava-levi}
 \end{table}
 
-Pri tem žarometu je naš program izračunal rezultate, ki so skoraj isti kot fotometer. Pri 0° je program izračunal isto vrednost kot fotometer. Pri -2°in +2° pa je program izračunal vrednost, ki je za 0,02° različna od fotometra, kar je enako 0,3 cm (tabela \ref{tbl:primerjava-levi}). Podrobni rezultati fotometra se nahajajo v prilogah \ref{ch:rf}.
+Pri tem žarometu je naš program izračunal rezultate, ki so skoraj isti kot rezultati fotometra. Pri 0° je program izračunal isto vrednost kot fotometer. Pri -2° in +2° pa je program izračunal vrednost, ki je za 0,02° različna od fotometra, kar je enako 0,3 cm (tabela \ref{tbl:primerjava-levi}). Podrobni rezultati fotometra se nahajajo v prilogah \ref{ch:rf}.
 
 \section{Desni žaromet}
 
@@ -718,100 +602,74 @@ Pri tem žarometu je naš program izračunal rezultate, ki so skoraj isti kot fo
 +2°  & -1,08° & -1,22°   \\ 
 \end{tabular}
 \end{center}
+\vspace{-20pt}
 \caption{Primerjava rezultatov fotometra in prenosnega merilnika za desni žaromet.}
+
 \label{tbl:primerjava-desni}
 \end{table}
 
-Tukaj je program vrnil različne rezultate pri vseh pozicijah. Razlike so pri poziciji 0° 0,11° (1,63 cm) pri -2° 0,21° (3,11 cm) in pri +2° 0,14° (2,07 cm) (tabela \ref{tbl:primerjava-desni}). Na različne rezultate lahko vpliva več dejavnikov. Lahko je to slaba kvaliteta slike. Lahko so moteči elementi na sliki, kot so vodilne črte. Lahko je drugačna osvetlitev slike. Lahko pa tudi temperatura žarometa krči ali raztegne materiale in so zato drugačni rezultati med enimi ali drugimi meritvami. Podrobni rezultati fotometra se nahajajo v prilogah \ref{ch:rf}.
+Tukaj je program vrnil različne rezultate pri vseh pozicijah. Razlike so pri poziciji 0° 0,11° (1,63 cm) pri -2° 0,21° (3,11 cm) in pri +2° 0,14° (2,07 cm) (tabela \ref{tbl:primerjava-desni}). Na različne rezultate lahko vpliva več dejavnikov. Lahko je to slaba kvaliteta slike. Lahko so moteči elementi na sliki, kot so vodilne črte. Lahko je drugačna osvetlitev slike. Lahko pa tudi temperatura žarometa skrči ali raztegne materiale in so zato drugačni rezultati med enimi ali drugimi meritvami. Podrobni rezultati fotometra se nahajajo v prilogah \ref{ch:rf}.
 
 \chapter{Zaključne ugotovitve}
 \label{ch:zakljucek}
-Program vključuje vso funkcionalnost, ki je bila potrebna. Deluje hitro. Je nastavljiv in zna obdelati veliko vrst slik snopov svetlobe. Dobljeni rezultati so na nekaterih slikah še različni od fotometra. Za nadaljnji razvoj bi bilo potrebno nekatere algoritme še malo spremeniti in določiti najbolj optimalne nastavitve fotoaparata ali kamere. Med reševanjem problema mi je največjo težavo povzročal izračun drugega odvoda. Poizkusil sem veliko možnih rešitev, kako čim bolj natančno odvajati funkcijo. Na koncu sem problem rešil tako, da sem funkcijo zgladil in jo šele potem odvajal. Vendar pa so bile tudi tukaj težave. Potrebno je bilo najti postopek, kako najti najboljši približek naši originalni funkciji snopa, ki se ga da lepo odvajati. Na tem delu je največja možnost napake, ampak tudi najboljša priložnost, da se izboljša natančnost. Včasih je problem pri obdelavi slike in sicer pri detekciji horizontalnih vodilnih črt. To se še posebej opazi pri žarometih za meglenke, kjer se mejo postavi na zadnjo vodilno črto. Tako sta prvi dve v temi in se ju včasih ne zazna. Moja ideja za izboljšavo je, da fotografija vsebuje en del tal sobe. Tretjo horizontalno črto in tla se nato uporabi kot referenčni točki in izračuna se pozicijo prve in druge vodilne črte.
+Program vključuje vso funkcionalnost, ki je bila potrebna. Deluje hitro. Je nastavljiv in zna obdelati veliko vrst slik snopov svetlobe. Dobljeni rezultati so na nekaterih slikah še različni od fotometra. Za nadaljnji razvoj bi bilo potrebno nekatere algoritme še malo spremeniti in določiti najbolj optimalne nastavitve fotoaparata ali kamere. Med reševanjem problema mi je največjo težavo povzročal izračun drugega odvoda. Poizkusil sem veliko možnih rešitev, kako čim bolj natančno odvajati funkcijo. Na koncu sem problem rešil tako, da sem funkcijo zgladil in jo šele potem odvajal. Vendar pa so bile tudi tukaj težave. Potrebno je bilo najti postopek, kako najti najboljši približek naši originalni funkciji snopa, ki se ga da lepo odvajati. Na tem delu je največja možnost napake, ampak tudi najboljša priložnost, da se izboljša natančnost. Včasih je problem pri obdelavi slike in sicer pri detekciji horizontalnih vodilnih črt. To se še posebej opazi pri žarometih za meglenke, kjer se mejo postavi na zadnjo vodilno črto. Tako sta prvi dve v temi in se ju včasih ne zazna. Moja ideja za izboljšavo je, da fotografija vsebuje en del tal sobe. Tretjo horizontalno črto in tla se nato uporabi kot referenčni točki in se izračuna pozicijo prve in druge vodilne črte.
 
 \chapter{Priloge}
 \section{Rezultati fotometra}
 \label{ch:rf}
 Meritve fotometra so bili izvedene na žarometih za levo in desno meglenko. Izmerjene so bile na pozicijah kotov +2°, -2° in 0°, glede na centralno vertikalno vodilno črto. Na slikah \ref{pic:foto-1}, \ref{pic:foto-2}, \ref{pic:foto-3}, \ref{pic:foto-4}, \ref{pic:foto-5} in \ref{pic:foto-6} sta prikazana grafa intenzitet (zgornja krivulja) in prvega odvoda intenzitet svetlobe (spodnja krivulja na grafu). Na $x$ osi je prikazan odmik od centralne horizontalne vodilne črte v stopinjah, na $y$ osi pa intenziteta svetlobe. Za točko prehoda svetlo-temne meje se upošteva maksimum prvega odvoda intenzitet svetlobe. Začetek in konec svetlo-temne meje na slikah nista prikazana.
-\begin{figure}
-\begin{center}
-\includegraphics[width=10cm]{slike/fotometer-desni-0.jpg}
-\end{center}
-\caption{Meritev fotometra, desni žaromet, pozicija 0°.}
-\label{pic:foto-1}
-\end{figure}
 
-\begin{figure}
-\begin{center}
-\includegraphics[width=10cm]{slike/fotometer-desni-+2.jpg}
-\end{center}
-\caption{Meritev fotometra, desni žaromet, pozicija +2°.}
-\label{pic:foto-2}
-\end{figure}
+\slika{slike/fotometer-desni-0.jpg}{Meritev fotometra, desni žaromet, pozicija 0°.}{pic:foto-1}
 
-\begin{figure}
-\begin{center}
-\includegraphics[width=10cm]{slike/fotometer-desni--2.jpg}
-\end{center}
-\caption{Meritev fotometra, desni žaromet, pozicija -2°.}
-\label{pic:foto-3}
-\end{figure}
+\slika{slike/fotometer-desni-+2.jpg}{Meritev fotometra, desni žaromet, pozicija +2°.}{pic:foto-2}
 
-\begin{figure}
-\begin{center}
-\includegraphics[width=10cm]{slike/fotometer-levi-0.jpg}
-\end{center}
-\caption{Meritev fotometra, levi žaromet, pozicija 0°.}
-\label{pic:foto-4}
-\end{figure}
+\slika{slike/fotometer-desni--2.jpg}{Meritev fotometra, desni žaromet, pozicija -2°.}{pic:foto-3}
 
-\begin{figure}
-\begin{center}
-\includegraphics[width=10cm]{slike/fotometer-levi-+2.jpg}
-\end{center}
-\caption{Meritev fotometra, levi žaromet, pozicija +2°.}
-\label{pic:foto-5}
-\end{figure}
+\slika{slike/fotometer-levi-0.jpg}{Meritev fotometra, levi žaromet, pozicija 0°.}{pic:foto-4}
 
-\begin{figure}
-\begin{center}
-\includegraphics[width=10cm]{slike/fotometer-levi--2.jpg}
-\end{center}
-\caption{Meritev fotometra, levi žaromet, pozicija -2°.}
-\label{pic:foto-6}
-\end{figure}
+\slika{slike/fotometer-levi-+2.jpg}{Meritev fotometra, levi žaromet, pozicija +2°.}{pic:foto-5}
+
+\slika{slike/fotometer-levi--2.jpg}{Meritev fotometra, levi žaromet, pozicija -2°.}{pic:foto-6}
 
 
 
 \begin{thebibliography}{99}
 
-\bibitem{sobel-wiki} Klaus Engel. \textit{Real-time volume graphics}, str. 112–114, A K Peters, 2006.
+\newcommand{\liturl}[4]{
+	\bibitem{#4} (#3) #1. Dostopno na:\\#2
+}
 
-\bibitem{oreilly-dp} Eric Freeman, Elisabeth Robson, Bert Bates, Kathy Sierra, \textit{Head First Design Patterns}, O'Reilly, 2004.
+\newcommand{\litknjiga}[5]{
+	\bibitem{#5} #1, \textit{#2}, #3, #4.
+}
 
-\bibitem{treshold-wiki} Rafael C. Gonzalez, Richard E. Woods. \textit{Thresholding. In Digital Image Processing}, str. 595–611, Pearson Education, 2002.
+\newcommand{\litknjigastr}[6]{
+	\litknjiga{#1}{#2}{str. #6, #3}{#4}{#5}
+}
 
-\bibitem{RGB} Charles A. Poynton. \textit{Digital Video and HDTV: Algorithms and Interfaces}, Morgan Kaufmann, 2003.
+\litknjigastr{Klaus Engel}{Real-time volume graphics}{A. K. Peters}{2006}{sobel-wiki}{112–114}
 
-\bibitem{hough-wiki} Linda Shapiro, George Stockman. \textit{Computer Vision}, Prentice-Hall Inc., 2001.
+\litknjiga{Eric Freeman, Elisabeth Robson, Bert Bates, Kathy Sierra}{Head First Design Patterns}{O'Reilly}{2004}{oreilly-dp}
 
-\bibitem{oreilly-cs} Andrew Stellman, Jennifer Greene, \textit{Head First C\#}, O'Reilly, 2007.
+\litknjigastr{Rafael C. Gonzalez, Richard E. Woods}{Thresholding. In Digital Image Processing}{Pearson Education}{2002}{treshold-wiki}{595–611}
 
-\bibitem{sobel} (2012) Aforge.NET Sobelov filter. Dostopno na:\\ 
-http://www.aforgenet.com/framework/docs/html/2c8218cc-921c-34d8-5c88-39c652488490.htm 
-http://en.wikipedia.org/wiki/Sobel\_operator
+\litknjiga{Charles A. Poynton}{Digital Video and HDTV: Algorithms and Interfaces}{Morgan Kaufmann}{2003}{RGB}
 
-\bibitem{hough} (2012) Aforge.NET Houghova transformacija. Dostopno na: 
-http://www.aforgenet.com/framework/features/hough\_transformation.html 
-http://en.wikipedia.org/wiki/Hough\_transform 
+\litknjiga{Linda Shapiro, George Stockman}{Computer Vision}{Prentice-Hall Inc.}{2001}{hough-wiki}
 
-\bibitem{beanstalkd} (2012) BeanstalkD. Dostopno na:  
-https://github.com/kr/beanstalkd 
+\litknjiga{Andrew Stellman, Jennifer Greene}{Head First C\#}{O'Reilly}{2007}{oreilly-cs}
 
-\bibitem{second-d} (2012) Finite difference. Dostopno na:\\ 
-http://en.wikipedia.org/wiki/Finite\_difference
+\liturl{Aforge.NET Sobelov filter}{http://www.aforgenet.com/framework/docs/html/2c8218cc-921c-34d8-5c88-39c652488490.htm\\http://en.wikipedia.org/wiki/Sobel\_operator}{2012}{sobel}
 
-\bibitem{LHS} (2012) Lightness, Hue, Saturation, Wikipedia. Dostopno na: \\
-http://en.wikipedia.org/wiki/HSL\_color\_space
+\liturl{Aforge.NET Houghova transformacija}{http://www.aforgenet.com/framework/features/hough\_transformation.html\\http://en.wikipedia.org/wiki/Hough\_transform }{2012}{hough}
+
+\liturl{BeanstalkD}{https://github.com/kr/beanstalkd}{2012}{beanstalkd}
+
+\liturl{Finite difference}{http://en.wikipedia.org/wiki/Finite\_difference}{2012}{second-d}
+
+\liturl{Lightness, Hue, Saturation}{http://en.wikipedia.org/wiki/HSL\_color\_space}{2012}{LHS}
+
+\liturl{Fotometer podjetja Hella Saturnus d.o.o.}{http://www.hella-saturnus.si/hella-si-si/278.html}{2012}{hella-fotometer}
 
 \end{thebibliography}
 \end{document}
