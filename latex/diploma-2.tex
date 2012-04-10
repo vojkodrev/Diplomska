@@ -175,7 +175,7 @@ Zanimala nas bo svetlo-temna meja. Njen prehod, oblika in širina. Tehnologije z
 
 Cilj te diplomske naloge je, da razvijemo alternativo te napravi. Ta alternativa bo v obliki računalniškega programa, ki bo obdeloval sliko snopa svetlobe žarometa. Soba bo seveda še vedno potrebna. Vendar jo bo potrebno manj zaščititi pred motnjami. Namesto fotometra potrebujemo samo fotoaparat ali kamero. Naš program mora tako omogočati vsaj isto funkcionalnost. Biti mora hitrejši in dati mora natančne rezultate.
 
-Diplomska naloga se začne s poglavjem, kjer opišem naš problem in cilje. Opiše se postopek pridobitve slike in prikazana je vhodna slika. Nato sledi pregled obstoječih rešitev. Sem spada opis fotometra in postopka, kako z njim izmerimo svetilne lastnosti žarometa. V naslednjem poglavju je opisan razvoj naše aplikacije. Najprej podam zahteve strojne opreme in opis programskih jezikov, ki so na voljo. Nato je opisan uporabniški vmesnik. Ter celoten postopek obdelave slike, računanja svetlo-temne meje. Sledi opis postopka optimizacije. Podani so časi hitrosti algoritmov pred in po optimizaciji. V poglavju \ref{ch:primerjava} je narejena primerjava rezultatov našega programa in fotometra. Nato v poglavju \ref{ch:zakljucek} podamo zaključne ugotovitve. Dodane so še priloge, katere vsebujejo meritve in rezultate fotometra za levo in desno meglenko.
+Diplomska naloga se začne s poglavjem, kjer opišem naš problem in cilje. Opiše se postopek pridobitve slike in prikazana je vhodna slika. Nato sledi pregled obstoječih rešitev. Sem spada opis fotometra in postopka, kako z njim izmerimo svetilne lastnosti žarometa. V naslednjem poglavju je opisan razvoj naše aplikacije. Najprej podam zahteve strojne opreme in opis programskih jezikov, ki so na voljo. Nato je opisan uporabniški vmesnik, ter celoten postopek obdelave slike, računanja svetlo-temne meje. Sledi opis postopka optimizacije. Podani so časi hitrosti algoritmov pred in po optimizaciji. V poglavju \ref{ch:primerjava} je narejena primerjava rezultatov našega programa in fotometra. Nato v poglavju \ref{ch:zakljucek} podamo zaključne ugotovitve.
 
 \chapter{Opis problema}
 Narediti moramo program, ki ugotavlja svetlobne lastnosti žarometov. Te lastnosti se potem upoštevajo pri oceni kakovosti žarometa in njegove izdelave. Žarometi so lahko sprednji, s kratkimi ali dolgimi lučmi, zadnji ali pa žarometi za meglenke. Snop iz žarometa usmerimo na steno, kjer so narisane vodilne črte. Te vsebujejo dve centralni črti (horizontalno in vertikalno) in več drugih pomožnih črtkanih črt. Centralni črti sta vsaki na kotih sijanja 0° in žaromet mora nanju sijati pravokotno. Pri sprednjih žarometih se tisto stran, ki sije višje, nastavi na prvo horizontalno črtkano črto. Pri meglenkah, kjer je cel snop v isti liniji, se žaromet nastavi na zadnjo horizontalno črtkano črto. S programom je potrebno najti prehod svetlo-temne meje v stopinjah in centimetrih, torej oddaljenost glede na horizontalno centralno črto. Izračunati moramo širino svetlo-temne meje. Sliki \ref{pic:vhp1} in \ref{pic:vhp2} sta primera vhodnih slik.
@@ -208,7 +208,7 @@ Zahteve za delovanje programa:
 \item Prenosnik ali osebni računalnik.
 \item Operacijski sistem Windows XP, Vista ali 7.
 \item Naložen .NET framework verzije 4.0 ali več.
-\item Intel ali Athlon procesor. 32 ali 64 biten. Priporočeno, da je več jedrni.
+\item Intel ali Athlon procesor. 32 ali 64 biten. Priporočeno, da je večjedrni.
 \item Priporočena količina pomnilnika je 2GB.
 \item Velikost diska mora biti dovolj velika za operacijski sistem, .NET framework in slike svetlo-temnih mej. Sam program je velik nekaj MB. 
 \item Fotoaparat ali kamera (v nastavitvi za slikanje in ne snemanje).
@@ -473,7 +473,7 @@ Algoritem sprejme kot vhodni parameter sliko svetlo-temne meje, prebere iz trenu
 
 \begin{figure}
 \begin{center}
-\includegraphics[width=8cm]{slike/intenzitete.jpg}
+\includegraphics[width=10cm]{slike/intenzitete.jpg}
 \end{center}
 \caption{Intenzitete izbrane vertikale v stopinjah.}
 \label{pic:intenzitete1}
@@ -481,7 +481,7 @@ Algoritem sprejme kot vhodni parameter sliko svetlo-temne meje, prebere iz trenu
 
 \begin{figure}
 \begin{center}
-\includegraphics[width=8cm]{slike/intenzitete-v-cm.jpg}
+\includegraphics[width=10cm]{slike/intenzitete-v-cm.jpg}
 \end{center}
 \caption{Intenzitete izbrane vertikale v centimetrih.}
 \label{pic:intenzitete2}
@@ -527,7 +527,7 @@ Slika \ref{pic:smooth1} prikazuje našo zglajeno funkcijo. Slika \ref{pic:smooth
 
 \begin{figure}
 \begin{center}
-\includegraphics[width=8cm]{slike/glajena-funkcija.jpg}
+\includegraphics[width=10cm]{slike/glajena-funkcija.jpg}
 \end{center}
 \caption{Zglajena funkcija intenzitet po vertikali.}
 \label{pic:smooth1}
@@ -535,7 +535,7 @@ Slika \ref{pic:smooth1} prikazuje našo zglajeno funkcijo. Slika \ref{pic:smooth
 
 \begin{figure}
 \begin{center}
-\includegraphics[width=8cm]{slike/glajena-+-original.jpg}
+\includegraphics[width=10cm]{slike/glajena-+-original.jpg}
 \end{center}
 \caption{Primerjava zglajene in originalne funkcije.}
 \label{pic:smooth2}
