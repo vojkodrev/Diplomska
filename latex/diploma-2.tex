@@ -563,7 +563,7 @@ Kot sem že omenil v poglavju \ref{ch:iskanj-sv-t-m}, sem pri iskanju svetlo-tem
 \slika{slike/optimizacija_grafi/optimizacija-s-paralelnim-procesiranjem.jpg}{Pospešitev algoritmov s paralelnim procesiranjem.}{pic:opt-p}
 
 \subsection{Algoritem za glajenje funkcij}
-Po podrobni analizi kode sem ugotovil, da glavni algoritem največ časa porabi pri glajenju funkcije. Začetni algoritem je za vsak element sešteval polovico velikosti okna elementov pred njim in za njim. Ta algoritem sem nato spremenil, da hrani vsoto okna skozi celotno vertikalo. Vsak nov element, ki pride v okno, se prišteje k vsoti. Odšteje se element, ki zapusti okno. Tako je časovna zahtevnost algoritma padla iz O(velikost okna $\times$ n) na O(n) ($n$ je število elementov v naši funkciji), hitrost algoritma pa na 2 sekundi (slika \ref{pic:opt-g}).
+Po podrobni analizi kode sem ugotovil, da glavni algoritem največ časa porabi za glajenje funkcije. Začetni algoritem je za vsak element sešteval polovico velikosti okna elementov pred njim in za njim. Ta algoritem sem nato spremenil, da hrani vsoto okna skozi celotno vertikalo. Vsak nov element, ki pride v okno, se prišteje k vsoti. Odšteje se element, ki zapusti okno. Tako je časovna zahtevnost algoritma padla iz O(velikost okna $\times$ n) na O(n) ($n$ je število elementov v naši funkciji), hitrost algoritma pa na 2 sekundi (slika \ref{pic:opt-g}).
 
 
 \slika{slike/optimizacija_grafi/optimizacija-algoritma-za-glajenje-funkcij.jpg}{Pospešitev algoritma za glajenje funkcije.}{pic:opt-g}
