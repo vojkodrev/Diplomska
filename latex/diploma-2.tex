@@ -377,7 +377,7 @@ sobel = new SobelEdgeDetector().Apply(crnobelaslika);
 \end{samepage}
 Rezultat filtra je slika \ref{pic:sobel}.
 
-\slika{slike/sobel.jpg}{Rezultat Sobelovega filtera.}{pic:sobel}
+\slika{slike/sobel.jpg}{Rezultat Sobelovega filtra.}{pic:sobel}
 
 \subsection{Prag}
 S tretjim korakom izločimo šum z algoritmom za določanje pragu \cite{treshold-wiki}. To storimo tako, da za vsako točko pogledamo njeno intenziteto (po pretvorbi v črno-belo sliko imajo vse tri komponente točke isto vrednost). Intenziteta je enaka vrednosti ene izmed RGB komponent. Če je intenziteta večja od vrednosti, ki si jo uporabnik izbere (intenzitete imajo lahko vrednost od 0 do 255), potem na novo sliko vpišemo točko z maksimalno intenziteto. Če je ta vrednost manjša od izbrane, vpišemo točko z minimalno intenziteto (bela točka ima intenziteto 255, črna pa intenziteto 0). Tako na novi sliki še bolj poudarimo vodilne črte in zmanjšamo količino šuma (torej točke, ki niso del vodilnih črt in bi ovirale njihovo detekcijo). Ta algoritem v psevdokodi zgleda tako:
