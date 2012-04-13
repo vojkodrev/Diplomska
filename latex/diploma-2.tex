@@ -1,4 +1,4 @@
-\documentclass[oneside, a4paper, 12pt]{book}
+\documentclass[a4paper, 12pt]{book}
 
 \usepackage[utf8x]{inputenc}   % omogoča uporabo slovenskih črk kodiranih v formatu UTF-8 
 \usepackage[slovene,english]{babel}    % naloži, med drugim, slovenske delilne vzorce
@@ -10,12 +10,7 @@
 
 \renewcommand{\baselinestretch}{1.3} % ustrezen razmik med vrsticami
 
-%oznake strani
-\renewcommand{\chaptermark}[1]%
-{\markboth{\MakeUppercase{\thechapter.\ #1}}{}} \renewcommand{\sectionmark}[1]%
-{\markright{\MakeUppercase{\thesection.\ #1}}} \renewcommand{\headrulewidth}{0.5pt} \renewcommand{\footrulewidth}{0pt} 
-\fancyhf{}
-\fancyhead[LE,RO]{\sl \thepage} \fancyhead[LO]{\sl \rightmark} \fancyhead[RE]{\sl \leftmark}
+
 
 \newcommand{\BibTeX}{{\sc Bib}\TeX}
 
@@ -88,6 +83,8 @@ informatiko ter mentorja.}
 
 \noindent
 \pagebreak
+
+%\clearemptydoublepage
 
 % prazna stran
 \clearemptydoublepage
@@ -172,6 +169,15 @@ Cilj diplomske naloge je razviti program za preverjanje svetilnih lastnosti avto
 \chapter*{Abstract}
 
 The goal of this thesis is to develop a program for measuring lightness properties of car lights. Input parameter of this program is an image of a car light's beam. Beam is projected on a wall where guidelines are. Three horizontal and one vertical line. Program calculates from the image the cut-off line of the beam. This is a transition line from dark to light. User can select a vertical line on an image to see it's light intensities on a chart. User interface is composed of a set of plug-ins. They are read from a certain directory and loaded into a program dynamically. Each gets it's own tab. They use a Publisher-Subscriber model to communicate with each other. Through it images and other parameters are passed between steps in a program. Input image is first transformed into a black and white image. Then a Sobel's filter and Hough's line transformation are used to extract the guidelines. Guidelines are later used to help calculate real distances on the image in angles and centimetres from the central guidelines. For each vertical on an image light intensities of pixels are calculated. Then the light cut-off point is calculated, which is equal to the inflection point on a curve of light intensities. This is where a second derivative of this curve equals zero. Then the beginning and the end of the cut-off line are calculated (maximum and minimum of the second derivative). At the end width of the cut-off line is calculated from these points and shown on a chart. Program was written as an alternative to a machine called Photometer which with a help of a light detector and mechanical movements of a car light calculates the cut-off line. Results of our program are comparable with a Photometer, but they depend on a quality and lightness of an input image. Program works fast. It can find a cut-off line on an image (with an interval of 0.25°) in about two seconds.
+
+
+%oznake strani
+\renewcommand{\chaptermark}[1]%
+{\markboth{\MakeUppercase{\thechapter.\ #1}}{}} \renewcommand{\sectionmark}[1]%
+{\markright{\MakeUppercase{\thesection.\ #1}}} \renewcommand{\headrulewidth}{0.5pt} \renewcommand{\footrulewidth}{0pt} 
+\fancyhf{}
+\fancyhead[LE,RO]{\sl \thepage} \fancyhead[LO]{\sl \rightmark} \fancyhead[RE]{\sl \leftmark}
+
 
 \selectlanguage{slovene}
 % prazna stran
