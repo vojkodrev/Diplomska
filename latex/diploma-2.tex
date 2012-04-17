@@ -1,4 +1,4 @@
-\documentclass[a4paper, 12pt]{book}
+\documentclass[oneside, a4paper, 12pt]{book}
 
 \usepackage[utf8x]{inputenc}   % omogoča uporabo slovenskih črk kodiranih v formatu UTF-8 
 \usepackage[slovene,english]{babel}    % naloži, med drugim, slovenske delilne vzorce
@@ -78,11 +78,17 @@ informatiko ter mentorja.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % stran 3 med uvodnimi listi
-%\noindent
+\noindent
 %Namesto te strani {\bf vstavite} original izdane teme diplomskega 
 %dela s podpisom mentorja in dekana ter žigom fakultete, ki ga diplomant
 %dvigne v študent\-skem referatu,  preden odda izdelek v vezavo!
 %Glej tudi sam konec Poglavja~\ref{ch2} na strani~\pageref{pp}.
+
+\begin{figure}
+\begin{center}
+\includegraphics[keepaspectratio=true, width=13.5cm]{slike/original-teme.jpg}
+\end{center}
+\end{figure}
 
 % prazna stran
 \clearemptydoublepage
@@ -117,6 +123,10 @@ naslovom:
 
 \vspace{1cm}
 \noindent V Ljubljani, dne 15. aprila 2012 \hfill Podpis avtorja:
+\begin{figure}[h]
+\hfill\includegraphics[keepaspectratio=true,width=3cm]{slike/podpis.JPG}
+\end{figure}
+
 
 % prazna stran
 \clearemptydoublepage
@@ -242,7 +252,8 @@ takih je fotometer. Naprava ima veliko pomanjkljivosti. Je velika in
 mehanska. Zanjo potrebuješ posebej pripravljeno sobo, da zmanjšaš količino 
 napake. Potrebuješ posebne stroje, ki žaromet premikajo. Na koncu pa 
 lahko testiraš samo en žaromet naenkrat. Poleg tega je vsak del 
-naprave potrebno vzdrževati. Cena fotometra se giblje okoli 500.000 evrov. 
+naprave potrebno vzdrževati. Cena fotometra se giblje okoli 500.000 evrov
+(soba, klimatske naprave, izolacija, programska in strojna oprema ipd.).
 Ampak je kljub temu potrebna, saj se brez nje ne da doseči potrebne 
 kvalitete, ki jo zahtevajo stranke. Tes\-ti, ki se na taki napravi 
 izvajajo so standardizirani. Naprava mora imeti certifikat, ki zagotavlja, 
@@ -710,7 +721,7 @@ elementov, začnemo s šestim elementom, k njemu prištejemo pet elementov
 pred njim in pet za njim. Število, ki ga dobimo, delimo z enajst in to 
 je naš rezultat za trenutni element. Nadaljujemo dokler nam elementov 
 v naši originalni funkciji ne zmanjka:
-%\pagebreak
+\pagebreak
 \begin{samepage}
 \begin{verbatim}
 a = dolzina(f) / 2
