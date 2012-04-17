@@ -6,6 +6,7 @@
 \usepackage{fancyhdr}          % poskrbi, na primer, za glave strani
 \usepackage{amssymb}           % dodatni simboli
 \usepackage{amsmath}           % eqref, npr.
+\usepackage[absolute]{textpos}
 
 
 \renewcommand{\baselinestretch}{1.3} % ustrezen razmik med vrsticami
@@ -83,11 +84,14 @@ informatiko ter mentorja.}
 %dvigne v študent\-skem referatu,  preden odda izdelek v vezavo!
 %Glej tudi sam konec Poglavja~\ref{ch2} na strani~\pageref{pp}.
 
-\begin{figure}
+\begin{textblock*}{297mm}(0mm,20mm)
+        %\includegraphics[width=\paperwidth]{xxx.png}
+        \includegraphics[keepaspectratio=true, width=19cm]{slike/orig-tema.pdf}
+\end{textblock*}
+
 \begin{center}
-\includegraphics[keepaspectratio=true, width=13.5cm]{slike/original-teme.jpg}
+
 \end{center}
-\end{figure}
 
 % prazna stran
 \clearemptydoublepage
