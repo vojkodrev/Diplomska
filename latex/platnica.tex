@@ -1,0 +1,64 @@
+\documentclass[oneside, a4paper, 12pt]{book}
+
+\usepackage[utf8x]{inputenc}   % omogoča uporabo slovenskih črk kodiranih v formatu UTF-8 
+\usepackage[slovene,english]{babel}    % naloži, med drugim, slovenske delilne vzorce
+\usepackage[pdftex]{graphicx}  % omogoča vlaganje slik različnih formatov 
+\usepackage{fancyhdr}          % poskrbi, na primer, za glave strani
+\usepackage{amssymb}           % dodatni simboli
+\usepackage{amsmath}           % eqref, npr.
+\usepackage[absolute]{textpos}
+
+
+\renewcommand{\baselinestretch}{1.3} % ustrezen razmik med vrsticami
+
+
+
+\newcommand{\BibTeX}{{\sc Bib}\TeX}
+
+\newcommand{\autfont}{\Large}
+\newcommand{\titfont}{\LARGE\bf}
+\newcommand{\clearemptydoublepage}{\newpage{\pagestyle{empty}\cleardoublepage}}
+\setcounter{tocdepth}{1}	      % globina kazala
+
+% konstrukti
+\newtheorem{izrek}{Izrek}[chapter]
+%\newtheorem{trditev}{Trditev}[izrek]
+\newenvironment{dokaz}{\emph{Dokaz.}\ }{\hspace{\fill}{$\Box$}}
+
+
+\newcommand{\slika}[3]{
+	\begin{figure}
+	\begin{center}
+	\includegraphics[keepaspectratio=true,width=9cm, height=9cm]{#1}
+	\end{center}
+	\vspace{-20pt}
+	\caption{#2}
+	\label{#3}
+	\end{figure}
+}
+
+
+\begin{document}
+\selectlanguage{slovene}
+\frontmatter
+\setcounter{page}{1} %
+\renewcommand{\thepage}{}       % preprecimo težave s številkami strani v kazalu 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%naslovnica
+ \thispagestyle{empty}%
+   \begin{center}
+    {\large\sc Univerza v Ljubljani\\%
+      Fakulteta za računalništvo in informatiko}%
+    \vskip 10em%
+    {\autfont Vojko Drev\par}%
+    {\titfont Prenosni merilnik svetlobnih lastnosti žarometov \par}%
+    {\vskip 2em \textsc{DIPLOMSKO DELO\\[2mm] 
+	VISOKOŠOLSKEGA STROKOVNEGA ŠTUDIJA PRVE STOPNJE}\par}%
+    \vfill\null%
+    {\large \textsc{}\par}%
+    {\vskip 2em \large Ljubljana, 2012 \par}%
+\end{center}
+
+\end{document}
+
