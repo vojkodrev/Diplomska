@@ -127,7 +127,7 @@ naslovom:
 \vspace{1cm}
 \noindent V Ljubljani, dne 15. aprila 2012 \hfill Podpis avtorja:
 \begin{figure}[h]
-\hfill\includegraphics[keepaspectratio=true,width=4cm]{slike/podpis.JPG}
+\hfill\includegraphics[keepaspectratio=true,width=4cm]{slike/podpis.png}
 \end{figure}
 
 
@@ -498,7 +498,7 @@ je primeren model (angl. design pattern) po imenu založnik-naročnik
 (angl. Publisher-Subscriber) \cite{oreilly-dp, oreilly-cs}. Deluje na 
 principu dogodkov. Pri tem modelu nekdo pošilja sporočila. Ta lahko 
 vsebujejo slike, mere, velikosti točk ipd. Vsi, ki so prijavljeni na 
-določeno sporočilo, ga nato prejmejo in obdelajo. Vsebuje dve funkciji:
+določeno sporočilo, ga nato prejmejo in obdelajo. Vsebuje dve metodi:
 \begin{samepage}
 \begin{verbatim}
 class PubSub {
@@ -558,7 +558,7 @@ Drugi korak v našem postopku je uporaba Sobelovega filtra
 \cite{sobel-wiki}, ki na naši črno-beli sliki odkrije robove 
 vodilnih črt. Tukaj je bila uporabljena knjižnica za računalniški 
 vid Aforge.NET \cite{sobel}, kjer je ta filter že implementiran. Potreben 
-je klic funkcije:
+je klic metode:
 \begin{samepage}
 \begin{verbatim}
 sobel = new SobelEdgeDetector().Apply(crnobelaslika);
